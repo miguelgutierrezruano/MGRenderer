@@ -8,7 +8,7 @@
 
 namespace mg
 {
-	VertexBuffer::VertexBuffer(const void* data, size_t size)
+	VertexBuffer::VertexBuffer(const void* data, unsigned int size)
 	{
 		glGenBuffers(1, &id);
 		glBindBuffer(GL_ARRAY_BUFFER, id);

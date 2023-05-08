@@ -14,6 +14,7 @@
 #include <cassert>
 #include <iostream>
 
+#include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "Renderer.h"
@@ -29,8 +30,11 @@ using namespace std::chrono;
 
 int main()
 {
+    unsigned int windowWidth  = 960;
+    unsigned int windowHeight = 540;
+
     // Window with OpenGL context
-    Window window(VideoMode(960, 540), "MGLearnOpenGL", Style::Default, ContextSettings(24, 0, 0, 3, 3, ContextSettings::Core));
+    Window window(VideoMode(windowWidth, windowHeight), "MGLearnOpenGL", Style::Default, ContextSettings(24, 0, 0, 3, 3, ContextSettings::Core));
 
     // Glad initialization
     GLenum glad_init = gladLoadGL();
@@ -46,10 +50,10 @@ int main()
     Renderer renderer;
 
     float coordinates[] = {
-        100, 100, 0.0f, 0.0f,
-        200, 100, 1.0f, 0.0f,
-        200, 200, 1.0f, 1.0f,
-        100, 200, 0.0f, 1.0f
+        300, 200, 0.0f, 0.0f, 0.0f,
+        500, 200, 0.0f, 1.0f, 0.0f,
+        500, 400, 0.0f, 1.0f, 1.0f,
+        300, 400, 0.0f, 0.0f, 1.0f
     };
 
     unsigned int indices[] =
@@ -62,10 +66,10 @@ int main()
     mg::VertexArray vertexArray;
 
     // Create vertex buffer on GPU
-    mg::VertexBuffer vertexBuffer(coordinates, 4 * 4 * sizeof(float));
+    mg::VertexBuffer vertexBuffer(coordinates, 4 * 5 * sizeof(float));
 
     mg::VertexBufferLayout vertexBufferLayout;
-    vertexBufferLayout.push<float>(2);
+    vertexBufferLayout.push<float>(3);
     vertexBufferLayout.push<float>(2);
 
     vertexArray.addBuffer(vertexBuffer, vertexBufferLayout);
@@ -75,6 +79,7 @@ int main()
 
     // 4/3 projection matrix
     glm::mat4 projection = glm::ortho(0.f, 960.f, 0.f, 540.f, -1.0f, 1.0f);
+    //glm::mat4 projection = glm::perspective(100.f, (float)windowWidth / windowHeight, -1.f, 100.f);
 
     mg::Shader shader("../code/shaders/Basic.shader");
     shader.bind();
@@ -126,10 +131,10 @@ int main()
 
         renderer.clear();
 
-        shader.bind(); 
-        shader.setUniform4f("u_Color", glm::vec4(redChannel, 0.0f, 1.0f, 1.0f));
+        /*shader.bind(); 
+        shader.setUniform4f("u_Color", glm::vec4(redChannel, 0.0f, 1.0f, 1.0f));*/
 
-        renderer.draw(vertexArray, indexBuffer, shader);
+        //renderer.draw(vertexArray, indexBuffer, shader);
 
         if (redChannel > 1.0f)
             increment = -0.01f;

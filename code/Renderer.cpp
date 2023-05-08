@@ -28,6 +28,7 @@ namespace mg
         glClear(GL_COLOR_BUFFER_BIT);
     }
 
+    // Change shader for material
     void Renderer::draw(VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader)
     {
         shader.bind();

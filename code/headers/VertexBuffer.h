@@ -17,7 +17,7 @@ namespace mg
 
 	public:
 
-		VertexBuffer(const void* data, size_t size);
+		VertexBuffer(const void* data, unsigned int size);
 	   ~VertexBuffer();
 
 	public:
