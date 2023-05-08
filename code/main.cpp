@@ -44,15 +44,22 @@ int main()
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
+    // Enable backface culling
+    glEnable(GL_CULL_FACE);
+
+    // Enable blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // 4/3 projection matrix
-    glm::mat4 projection = glm::ortho(-2.f, 2.f, -2.f, 2.f, -1.0f, 1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0, 0, -8.f));
+
+    glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)windowWidth / (float)windowHeight, 0.1f, 50.f);
 
     mg::Shader shader("../code/shaders/Basic.shader");
     shader.bind();
-    shader.setUniformMat4f("modelViewProjection", projection);
+    shader.setUniformMat4f("view", view);
+    shader.setUniformMat4f("projection", projection);
 
     Mesh cube(&shader);
 
@@ -66,6 +73,9 @@ int main()
     window.setVerticalSyncEnabled(true);
 
     bool running = true;
+
+    float cubeXRotation = 0;
+    float cubeYRotation = 0;
 
     do
     {
@@ -85,6 +95,12 @@ int main()
             }
             }
         }
+
+        cubeXRotation += 0.05f;
+        cubeYRotation +=  0.2f;
+        cube.transform.set_rotation(vec3(cubeXRotation, cubeYRotation, 0));
+
+        glClear(GL_COLOR_BUFFER_BIT);
 
         cube.render();
 

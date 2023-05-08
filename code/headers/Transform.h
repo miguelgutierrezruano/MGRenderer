@@ -38,6 +38,6 @@ namespace mg
 		void set_rotation(vec3 newRotation) { rotation = newRotation; }
 		void set_scale(vec3 newScale) { scale = newScale; }
 
-		mat4 get_matrix();
+		const mat4 get_matrix();
 	};
 }

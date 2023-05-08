@@ -25,7 +25,7 @@ namespace mg
 
 	}
 
-	mat4 Transform::get_matrix()
+	const mat4 Transform::get_matrix()
 	{
 		mat4 identity = mat4(1);
 		mat4 scalingMatrix = glm::scale(identity, scale);

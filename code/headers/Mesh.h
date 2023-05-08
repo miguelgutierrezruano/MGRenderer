@@ -11,14 +11,22 @@
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
-
-using std::shared_ptr;
+#include "Transform.h"
 
 namespace mg
 {
-	// For now this is a cube to test
+	struct Vertex
+	{
+		vec3 position;
+		vec3 color;
+	};
+
 	class Mesh
 	{
+
+	public:
+
+		Transform transform;
 
 	private:
 
@@ -26,9 +34,10 @@ namespace mg
 		VertexBuffer vbo;
 		IndexBuffer  ibo;
 
+		// TODO: Change for materials
 		Shader* shader;
 
-		static const GLfloat vertexAttributes[];
+		static const Vertex vertexAttributes[];
 		static const GLuint indices[];
 
 	public:
