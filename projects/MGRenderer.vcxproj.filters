@@ -51,6 +51,9 @@
     <ClCompile Include="..\code\Texture.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\code\Transform.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\code\shaders\Basic.shader">
@@ -80,6 +83,9 @@
       <Filter>sources\other\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="..\code\headers\Texture.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\Transform.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
