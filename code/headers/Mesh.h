@@ -9,6 +9,7 @@
 
 #include "Shader.h"
 #include "VertexArray.h"
+#include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
 using std::shared_ptr;
@@ -21,10 +22,11 @@ namespace mg
 
 	private:
 
-		VertexArray vao;
-		IndexBuffer ibo;
+		VertexArray  vao;
+		VertexBuffer vbo;
+		IndexBuffer  ibo;
 
-		shared_ptr<Shader> shader;
+		Shader* shader;
 
 		static const GLfloat vertexAttributes[];
 		static const GLuint indices[];

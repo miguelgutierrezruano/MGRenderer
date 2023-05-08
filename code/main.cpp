@@ -30,11 +30,11 @@ using namespace std::chrono;
 
 int main()
 {
-    unsigned int windowWidth  = 960;
-    unsigned int windowHeight = 540;
+    unsigned int windowWidth = 800;
+    unsigned int windowHeight = 600;
 
     // Window with OpenGL context
-    Window window(VideoMode(windowWidth, windowHeight), "MGLearnOpenGL", Style::Default, ContextSettings(24, 0, 0, 3, 3, ContextSettings::Core));
+    Window window(VideoMode(windowWidth, windowHeight), "MGRenderer", Style::Default, ContextSettings(24, 0, 0, 3, 3, ContextSettings::Core));
 
     // Glad initialization
     GLenum glad_init = gladLoadGL();
@@ -47,59 +47,16 @@ int main()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    Renderer renderer;
-
-    float coordinates[] = {
-        300, 200, 0.0f, 0.0f, 0.0f,
-        500, 200, 0.0f, 1.0f, 0.0f,
-        500, 400, 0.0f, 1.0f, 1.0f,
-        300, 400, 0.0f, 0.0f, 1.0f
-    };
-
-    unsigned int indices[] =
-    {
-        0, 1, 2,
-        2, 3, 0
-    };
-
-    // Create VAO 
-    mg::VertexArray vertexArray;
-
-    // Create vertex buffer on GPU
-    mg::VertexBuffer vertexBuffer(coordinates, 4 * 5 * sizeof(float));
-
-    mg::VertexBufferLayout vertexBufferLayout;
-    vertexBufferLayout.push<float>(3);
-    vertexBufferLayout.push<float>(2);
-
-    vertexArray.addBuffer(vertexBuffer, vertexBufferLayout);
-
-    // Create index buffer on GPU
-    mg::IndexBuffer indexBuffer(indices, 6);
-
     // 4/3 projection matrix
-    glm::mat4 projection = glm::ortho(0.f, 960.f, 0.f, 540.f, -1.0f, 1.0f);
-    //glm::mat4 projection = glm::perspective(100.f, (float)windowWidth / windowHeight, -1.f, 100.f);
+    glm::mat4 projection = glm::ortho(-2.f, 2.f, -2.f, 2.f, -1.0f, 1.0f);
 
     mg::Shader shader("../code/shaders/Basic.shader");
     shader.bind();
-    shader.setUniform4f("u_Color", glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
     shader.setUniformMat4f("modelViewProjection", projection);
 
-    mg::Texture texture("../resources/textures/ciri.jpg");
-    texture.bind();
-    shader.setUniform1i("u_Texture", 0);
+    Mesh cube(&shader);
 
     glClearColor(0.1f, 0.1f, 0.1f, 1);
-
-    float redChannel = 0.0f;
-    float increment = 0.05f;
-
-    // Unbind every buffer
-    vertexArray.unbind();
-    shader.unbind();
-    vertexBuffer.unbind();
-    indexBuffer.unbind();
 
     // Delta time variables
     auto  chrono = high_resolution_clock();
@@ -121,27 +78,15 @@ int main()
         {
             switch (event.type)
             {
-                case Event::Closed:
-                {
-                    running = false;
-                    break;
-                }
+            case Event::Closed:
+            {
+                running = false;
+                break;
+            }
             }
         }
 
-        renderer.clear();
-
-        /*shader.bind(); 
-        shader.setUniform4f("u_Color", glm::vec4(redChannel, 0.0f, 1.0f, 1.0f));*/
-
-        //renderer.draw(vertexArray, indexBuffer, shader);
-
-        if (redChannel > 1.0f)
-            increment = -0.01f;
-        else if (redChannel < 0.0f)
-            increment = 0.01f;
-
-        redChannel += increment;
+        cube.render();
 
         window.display();
 

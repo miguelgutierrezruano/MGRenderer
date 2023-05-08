@@ -54,9 +54,15 @@
     <ClCompile Include="..\code\Transform.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\code\Mesh.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\code\shaders\Basic.shader">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\code\shaders\BasicTexture.shader">
       <Filter>resources\shaders</Filter>
     </None>
   </ItemGroup>
@@ -86,6 +92,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\code\headers\Transform.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\Mesh.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
