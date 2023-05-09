@@ -5,8 +5,11 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
 #include "Renderer.h"
+
+using namespace sf;
 
 namespace mg
 {
@@ -17,16 +20,12 @@ namespace mg
 	{
 		mainCamera.transform.set_position({ 0, 0, -8 });
 
-		// Get from camera transform
-		glm::mat4 view = mainCamera.get_view_matrix();
-
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
 		shader = make_shared<Shader>("../code/shaders/Basic.shader");
 
 		shader.get()->bind();
-		shader.get()->setUniformMat4f("view", view);
 		shader.get()->setUniformMat4f("projection", projection);
 
 		cube = make_shared<Mesh>(shader);
@@ -42,12 +41,16 @@ namespace mg
 		grandchildCube.get()->transform.set_scale({ .5f, .5f, .5f });
 	}
 
-	void Renderer::update()
+	void Renderer::update(float delta)
 	{
-		// Update camera and view matrix
+		update_camera(delta);
 
-		cubeXRotation += 0.2f;
-		cubeYRotation += 0.4f;
+		glm::mat4 view = mainCamera.get_view_matrix();
+		shader.get()->bind();
+		shader.get()->setUniformMat4f("view", view);
+
+		cubeXRotation += 0.05f;
+		cubeYRotation += 0.2f;
 		cube.get()->transform.set_rotation(vec3(cubeXRotation, cubeYRotation, 0));
 	}
 
@@ -56,5 +59,23 @@ namespace mg
 		cube.get()->render();
 		childCube.get()->render();
 		grandchildCube.get()->render();
+	}
+
+	void Renderer::update_camera(float delta)
+	{
+		float xAxis = 0;
+		float zAxis = 0;
+
+		if (Keyboard::isKeyPressed(Keyboard::W))
+			zAxis++;
+		if (Keyboard::isKeyPressed(Keyboard::A))
+			xAxis--;
+		if (Keyboard::isKeyPressed(Keyboard::S))
+			zAxis--;
+		if (Keyboard::isKeyPressed(Keyboard::D))
+			xAxis++;
+
+		mainCamera.move_camera_x_axis(xAxis, delta);
+		mainCamera.move_camera_z_axis(zAxis, delta);
 	}
 }

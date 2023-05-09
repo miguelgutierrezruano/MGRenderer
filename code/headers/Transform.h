@@ -40,6 +40,10 @@ namespace mg
 
 		void set_parent(Transform* parentTransform) { parent = parentTransform; }
 
+		const vec3 get_forward();
+		const vec3 get_right();
+		const vec3 get_up();
+
 		const mat4 get_matrix();
 	};
 }

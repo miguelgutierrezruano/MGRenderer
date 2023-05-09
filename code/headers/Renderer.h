@@ -8,6 +8,7 @@
 #include <glad/glad.h>
 #include <iostream>
 #include <memory>
+#include <SFML/Window.hpp>
 
 #include "Camera.h"
 #include "VertexArray.h"
@@ -46,7 +47,9 @@ namespace mg
 
 	public:
 
-		void update();
+		void update_camera(float delta);
+
+		void update(float delta);
 		void render();
 	};
 }

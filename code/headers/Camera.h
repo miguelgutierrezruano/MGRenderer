@@ -24,6 +24,8 @@ namespace mg
 		float nearPlane;
 		float farPlane;
 
+		float movementSpeed;
+
 	public:
 
 		Camera(float fov, float near, float far);
@@ -39,5 +41,8 @@ namespace mg
 
 		// Get projection matrix given by values
 		glm::mat4 get_projection_matrix(float aspectRatio);
+
+		void move_camera_x_axis(float value, float delta);
+		void move_camera_z_axis(float value, float delta);
 	};
 }

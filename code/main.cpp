@@ -79,17 +79,10 @@ int main()
 
         while (window.pollEvent(event))
         {
-            switch (event.type)
-            {
-				case Event::Closed:
-				{
-					running = false;
-					break;
-				}
-            }
+            if (event.type == Event::Closed) running = false;
         }
 
-        renderer.update();
+        renderer.update(delta_time);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

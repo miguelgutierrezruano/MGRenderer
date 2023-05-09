@@ -14,13 +14,13 @@ namespace mg
     const Vertex Mesh::vertexAttributes[] =
     {
         { vec3(-1,-1,-1), vec3(1, 1, 1) },
-        { vec3(+1,-1,-1), vec3(1, 1, 1) },
-        { vec3(+1,+1,-1), vec3(1, 1, 1) },
-        { vec3(-1,+1,-1), vec3(1, 1, 1) },
+        { vec3(+1,-1,-1), vec3(1, 0, 0) },
+        { vec3(+1,+1,-1), vec3(0, 1, 0) },
+        { vec3(-1,+1,-1), vec3(0, 0, 1) },
 		{ vec3(-1,-1,+1), vec3(0, 0, 0) }, // Back
-		{ vec3(+1,-1,+1), vec3(0, 0, 0) }, // Back
-		{ vec3(+1,+1,+1), vec3(0, 0, 0) }, // Back
-		{ vec3(-1,+1,+1), vec3(0, 0, 0) } // Back
+		{ vec3(+1,-1,+1), vec3(1, 1, 0) }, // Back
+		{ vec3(+1,+1,+1), vec3(0, 1, 1) }, // Back
+		{ vec3(-1,+1,+1), vec3(1, 0, 1) } // Back
     };
 
     const GLuint Mesh::indices[] =
