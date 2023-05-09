@@ -57,6 +57,12 @@
     <ClCompile Include="..\code\Mesh.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\code\Camera.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\code\OpenGLDebugger.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\code\shaders\Basic.shader">
@@ -95,6 +101,12 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\code\headers\Mesh.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\Camera.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\OpenGLDebugger.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

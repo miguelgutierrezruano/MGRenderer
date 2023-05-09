@@ -39,7 +39,7 @@ namespace mg
         5, 1, 0
     };
 
-	Mesh::Mesh(Shader* meshShader)
+	Mesh::Mesh(shared_ptr< Shader > meshShader)
         : ibo(indices, 3 * 12),
           shader(meshShader),
           vbo(vertexAttributes, 6 * 8 * sizeof(float))

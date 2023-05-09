@@ -85,10 +85,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\code\Camera.cpp" />
     <ClCompile Include="..\code\headers\other\stb_image.cpp" />
     <ClCompile Include="..\code\IndexBuffer.cpp" />
     <ClCompile Include="..\code\main.cpp" />
     <ClCompile Include="..\code\Mesh.cpp" />
+    <ClCompile Include="..\code\OpenGLDebugger.cpp" />
     <ClCompile Include="..\code\Renderer.cpp" />
     <ClCompile Include="..\code\Shader.cpp" />
     <ClCompile Include="..\code\Texture.cpp" />
@@ -101,8 +103,10 @@
     <None Include="..\code\shaders\BasicTexture.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\code\headers\Camera.h" />
     <ClInclude Include="..\code\headers\IndexBuffer.h" />
     <ClInclude Include="..\code\headers\Mesh.h" />
+    <ClInclude Include="..\code\headers\OpenGLDebugger.h" />
     <ClInclude Include="..\code\headers\other\stb_image.h" />
     <ClInclude Include="..\code\headers\Renderer.h" />
     <ClInclude Include="..\code\headers\Shader.h" />

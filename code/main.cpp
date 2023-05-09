@@ -51,17 +51,7 @@ int main()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0, 0, -8.f));
-
-    glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)windowWidth / (float)windowHeight, 0.1f, 50.f);
-
-    mg::Shader shader("../code/shaders/Basic.shader");
-    shader.bind();
-    shader.setUniformMat4f("view", view);
-    shader.setUniformMat4f("projection", projection);
-
-    Mesh cube(&shader);
+    Renderer renderer(windowWidth, windowHeight);
 
     glClearColor(0.1f, 0.1f, 0.1f, 1);
 
@@ -73,9 +63,6 @@ int main()
     window.setVerticalSyncEnabled(true);
 
     bool running = true;
-
-    float cubeXRotation = 0;
-    float cubeYRotation = 0;
 
     do
     {
@@ -96,13 +83,11 @@ int main()
             }
         }
 
-        cubeXRotation += 0.05f;
-        cubeYRotation +=  0.2f;
-        cube.transform.set_rotation(vec3(cubeXRotation, cubeYRotation, 0));
+        renderer.update();
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        cube.render();
+        renderer.render();
 
         window.display();
 

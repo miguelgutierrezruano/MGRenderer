@@ -7,25 +7,42 @@
 
 #include <glad/glad.h>
 #include <iostream>
+#include <memory>
 
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Mesh.h"
+
+using namespace std;
 
 namespace mg
 {
-	void GLClearError();
-	bool GLLogCall();
-
 	class Renderer
 	{
 
 	private:
 
+		// Camera
+		// Entity array
+		// Light array
+
+		// Convert to material
+		shared_ptr < Shader > shader;
+
+		shared_ptr < Mesh > cube;
+
+		float cubeXRotation;
+		float cubeYRotation;
+
 	public:
 
-		void clear();
-		void draw(VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader);
+		Renderer(unsigned int width, unsigned int height);
+
+	public:
+
+		void update();
+		void render();
 	};
 }
 

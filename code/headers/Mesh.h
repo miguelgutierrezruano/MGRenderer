@@ -13,6 +13,8 @@
 #include "IndexBuffer.h"
 #include "Transform.h"
 
+using namespace std;
+
 namespace mg
 {
 	struct Vertex
@@ -35,14 +37,14 @@ namespace mg
 		IndexBuffer  ibo;
 
 		// TODO: Change for materials
-		Shader* shader;
+		shared_ptr< Shader > shader;
 
 		static const Vertex vertexAttributes[];
 		static const GLuint indices[];
 
 	public:
 
-		Mesh(Shader* meshShader);
+		Mesh(shared_ptr< Shader > meshShader);
 
 	public:
 
