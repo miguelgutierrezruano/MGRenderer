@@ -9,6 +9,7 @@
 #include <iostream>
 #include <memory>
 
+#include "Camera.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
@@ -24,6 +25,8 @@ namespace mg
 	private:
 
 		// Camera
+		Camera mainCamera;
+
 		// Entity array
 		// Light array
 
@@ -32,6 +35,7 @@ namespace mg
 
 		shared_ptr < Mesh > cube;
 		shared_ptr < Mesh > childCube;
+		shared_ptr < Mesh > grandchildCube;
 
 		float cubeXRotation;
 		float cubeYRotation;

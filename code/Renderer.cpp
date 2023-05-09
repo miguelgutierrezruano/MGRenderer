@@ -11,14 +11,17 @@
 namespace mg
 {
 	Renderer::Renderer(unsigned int width, unsigned int height)
-		: cubeXRotation(0), cubeYRotation(0)
+		: cubeXRotation(0),
+		cubeYRotation(0),
+		mainCamera(45, 0.1f, 50.f)
 	{
+		mainCamera.transform.set_position({ 0, 0, 8 });
+
 		// Get from camera transform
-		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0, 0, -8.f));
+		glm::mat4 view = mainCamera.get_view_matrix();
 
 		// Get from camera get projection
-		glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)width / (float)height, 0.1f, 50.f);
+		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
 		shader = make_shared<Shader>("../code/shaders/Basic.shader");
 
@@ -28,10 +31,15 @@ namespace mg
 
 		cube = make_shared<Mesh>(shader);
 		childCube = make_shared<Mesh>(shader);
+		grandchildCube = make_shared<Mesh>(shader);
 
 		childCube.get()->transform.set_parent(&cube.get()->transform);
 		childCube.get()->transform.set_position({ 2, 0, 0 });
 		childCube.get()->transform.set_scale({ .5f, .5f, .5f });
+
+		grandchildCube.get()->transform.set_parent(&childCube.get()->transform);
+		grandchildCube.get()->transform.set_position({ 0, 2, 0 });
+		grandchildCube.get()->transform.set_scale({ .5f, .5f, .5f });
 	}
 
 	void Renderer::update()
@@ -45,5 +53,6 @@ namespace mg
 	{
 		cube.get()->render();
 		childCube.get()->render();
+		grandchildCube.get()->render();
 	}
 }
