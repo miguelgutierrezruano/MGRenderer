@@ -39,6 +39,11 @@ namespace mg
 
 		mat4 translationMatrix = glm::translate(identity, position);
 
-		return translationMatrix * rotationMatrix * scalingMatrix;
+		mat4 parentMatrix = mat4(1);
+
+		if (parent != nullptr)
+			parentMatrix = parent->get_matrix();
+
+		return parentMatrix * translationMatrix * rotationMatrix * scalingMatrix;
 	}
 }

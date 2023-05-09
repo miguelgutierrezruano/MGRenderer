@@ -27,6 +27,11 @@ namespace mg
 		shader.get()->setUniformMat4f("projection", projection);
 
 		cube = make_shared<Mesh>(shader);
+		childCube = make_shared<Mesh>(shader);
+
+		childCube.get()->transform.set_parent(&cube.get()->transform);
+		childCube.get()->transform.set_position({ 2, 0, 0 });
+		childCube.get()->transform.set_scale({ .5f, .5f, .5f });
 	}
 
 	void Renderer::update()
@@ -39,5 +44,6 @@ namespace mg
 	void Renderer::render()
 	{
 		cube.get()->render();
+		childCube.get()->render();
 	}
 }

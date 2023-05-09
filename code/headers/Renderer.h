@@ -31,6 +31,7 @@ namespace mg
 		shared_ptr < Shader > shader;
 
 		shared_ptr < Mesh > cube;
+		shared_ptr < Mesh > childCube;
 
 		float cubeXRotation;
 		float cubeYRotation;

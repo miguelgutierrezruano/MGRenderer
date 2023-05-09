@@ -47,6 +47,9 @@ int main()
     // Enable backface culling
     glEnable(GL_CULL_FACE);
 
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
 	// Enable antialiasing
 	glEnable(GL_MULTISAMPLE);
 
@@ -88,7 +91,7 @@ int main()
 
         renderer.update();
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         renderer.render();
 
