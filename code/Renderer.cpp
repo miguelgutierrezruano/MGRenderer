@@ -31,8 +31,8 @@ namespace mg
 
 	void Renderer::update()
 	{
-		cubeXRotation += 0.05f;
-		cubeYRotation +=  0.2f;
+		cubeXRotation += 0.2f;
+		cubeYRotation += 0.4f;
 		cube.get()->transform.set_rotation(vec3(cubeXRotation, cubeYRotation, 0));
 	}
 

@@ -34,7 +34,7 @@ int main()
     unsigned int windowHeight = 600;
 
     // Window with OpenGL context
-    Window window(VideoMode(windowWidth, windowHeight), "MGRenderer", Style::Default, ContextSettings(24, 0, 0, 3, 3, ContextSettings::Core));
+    Window window(VideoMode(windowWidth, windowHeight), "MGRenderer", Style::Default, ContextSettings(24, 0, 4, 3, 3, ContextSettings::Core));
 
     // Glad initialization
     GLenum glad_init = gladLoadGL();
@@ -46,6 +46,9 @@ int main()
 
     // Enable backface culling
     glEnable(GL_CULL_FACE);
+
+	// Enable antialiasing
+	glEnable(GL_MULTISAMPLE);
 
     // Enable blending
     glEnable(GL_BLEND);
@@ -75,11 +78,11 @@ int main()
         {
             switch (event.type)
             {
-            case Event::Closed:
-            {
-                running = false;
-                break;
-            }
+				case Event::Closed:
+				{
+					running = false;
+					break;
+				}
             }
         }
 
