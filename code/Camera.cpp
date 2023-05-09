@@ -17,11 +17,14 @@ namespace mg
 
 	glm::mat4 Camera::get_view_matrix()
 	{
-		return glm::inverse(transform.get_matrix());
+		// Forward y up
+
+		return glm::lookAtLH(transform.get_position(), transform.get_position() + vec3(0, 0, 1), vec3(0, 1, 0));
+		//return glm::inverse(transform.get_matrix());
 	}
 
 	glm::mat4 Camera::get_projection_matrix(float aspectRatio)
 	{
-		return glm::perspective(glm::radians(45.f), aspectRatio, 0.1f, 50.f);
+		return glm::perspectiveLH_NO(glm::radians(fieldOfView), aspectRatio, nearPlane, farPlane);
 	}
 }

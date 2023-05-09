@@ -13,14 +13,14 @@ namespace mg
     // vec3 position vec3 rgb color
     const Vertex Mesh::vertexAttributes[] =
     {
-        { vec3(-1,-1,+1), vec3(0, 0, 1) },
-        { vec3(+1,-1,+1), vec3(1, 0, 1) },
-        { vec3(+1,+1,+1), vec3(1, 1, 1) },
-        { vec3(-1,+1,+1), vec3(0, 1, 1) },
-        { vec3(-1,-1,-1), vec3(0, 0, 0) },
-        { vec3(+1,-1,-1), vec3(1, 0, 0) },
-        { vec3(+1,+1,-1), vec3(1, 1, 0) },
-        { vec3(-1,+1,-1), vec3(0, 1, 0) }
+        { vec3(-1,-1,-1), vec3(1, 1, 1) },
+        { vec3(+1,-1,-1), vec3(1, 1, 1) },
+        { vec3(+1,+1,-1), vec3(1, 1, 1) },
+        { vec3(-1,+1,-1), vec3(1, 1, 1) },
+		{ vec3(-1,-1,+1), vec3(0, 0, 0) }, // Back
+		{ vec3(+1,-1,+1), vec3(0, 0, 0) }, // Back
+		{ vec3(+1,+1,+1), vec3(0, 0, 0) }, // Back
+		{ vec3(-1,+1,+1), vec3(0, 0, 0) } // Back
     };
 
     const GLuint Mesh::indices[] =

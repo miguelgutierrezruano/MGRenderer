@@ -15,7 +15,7 @@ namespace mg
 		cubeYRotation(0),
 		mainCamera(45, 0.1f, 50.f)
 	{
-		mainCamera.transform.set_position({ 0, 0, 8 });
+		mainCamera.transform.set_position({ 0, 0, -8 });
 
 		// Get from camera transform
 		glm::mat4 view = mainCamera.get_view_matrix();
@@ -44,6 +44,8 @@ namespace mg
 
 	void Renderer::update()
 	{
+		// Update camera and view matrix
+
 		cubeXRotation += 0.2f;
 		cubeYRotation += 0.4f;
 		cube.get()->transform.set_rotation(vec3(cubeXRotation, cubeYRotation, 0));
