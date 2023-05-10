@@ -40,6 +40,8 @@ namespace mg
 		grandchildCube.get()->transform.set_parent(&childCube.get()->transform);
 		grandchildCube.get()->transform.set_position({ 0, 2, 0 });
 		grandchildCube.get()->transform.set_scale({ .5f, .5f, .5f });
+
+		Model model("../resources/models/japan.fbx");
 	}
 
 	void Renderer::update(float delta)

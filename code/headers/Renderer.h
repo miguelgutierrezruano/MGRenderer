@@ -11,6 +11,7 @@
 #include <SFML/Window.hpp>
 #include <glm/glm.hpp>
 
+#include "Model.h"
 #include "Camera.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"

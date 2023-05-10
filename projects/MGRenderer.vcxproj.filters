@@ -63,6 +63,9 @@
     <ClCompile Include="..\code\OpenGLDebugger.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\code\Model.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\code\shaders\Basic.shader">
@@ -107,6 +110,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\code\headers\OpenGLDebugger.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\Model.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
