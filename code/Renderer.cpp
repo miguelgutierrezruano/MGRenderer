@@ -16,6 +16,7 @@ namespace mg
 	Renderer::Renderer(unsigned int width, unsigned int height)
 		: cubeXRotation(0),
 		cubeYRotation(0),
+		mouseLastPosition(0, 0),
 		mainCamera(45, 0.1f, 50.f)
 	{
 		mainCamera.transform.set_position({ 0, 0, -8 });
@@ -63,19 +64,52 @@ namespace mg
 
 	void Renderer::update_camera(float delta)
 	{
-		float xAxis = 0;
-		float zAxis = 0;
+		vec2 currentMousePosition = vec2(Mouse::getPosition().x, Mouse::getPosition().y);
+		vec2 positionDifference = currentMousePosition - mouseLastPosition;
 
-		if (Keyboard::isKeyPressed(Keyboard::W))
-			zAxis++;
-		if (Keyboard::isKeyPressed(Keyboard::A))
-			xAxis--;
-		if (Keyboard::isKeyPressed(Keyboard::S))
-			zAxis--;
-		if (Keyboard::isKeyPressed(Keyboard::D))
-			xAxis++;
+		mouseLastPosition = currentMousePosition;
 
-		mainCamera.move_camera_x_axis(xAxis, delta);
-		mainCamera.move_camera_z_axis(zAxis, delta);
+		if (Mouse::isButtonPressed(Mouse::Button::Left))
+		{
+			mainCamera.move_camera(positionDifference, delta);
+		}
+		else if (Mouse::isButtonPressed(Mouse::Button::Middle))
+		{
+			mainCamera.move_camera(positionDifference, delta);
+		}
+		else if (Mouse::isButtonPressed(Mouse::Button::Right))
+		{
+			float xAxis = 0;
+			float zAxis = 0;
+
+			if (Keyboard::isKeyPressed(Keyboard::W))
+				zAxis++;
+			if (Keyboard::isKeyPressed(Keyboard::A))
+				xAxis--;
+			if (Keyboard::isKeyPressed(Keyboard::S))
+				zAxis--;
+			if (Keyboard::isKeyPressed(Keyboard::D))
+				xAxis++;
+
+			mainCamera.move_camera_x_axis(xAxis, delta);
+			mainCamera.move_camera_z_axis(zAxis, delta);
+
+			mainCamera.rotate_camera(positionDifference, delta);
+		}
+	}
+
+	void Renderer::zoom_camera(sf::Event& event, float delta)
+	{
+		if (event.type == Event::MouseWheelScrolled)
+		{
+			float zAxis = 0;
+
+			if (event.mouseWheelScroll.delta > 0)
+				zAxis++;
+			else
+				zAxis--;
+
+			mainCamera.move_camera_z_axis(zAxis * 5.f, delta);
+		}
 	}
 }

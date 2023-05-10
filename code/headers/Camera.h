@@ -25,6 +25,7 @@ namespace mg
 		float farPlane;
 
 		float movementSpeed;
+		float rotationSpeed;
 
 	public:
 
@@ -44,5 +45,8 @@ namespace mg
 
 		void move_camera_x_axis(float value, float delta);
 		void move_camera_z_axis(float value, float delta);
+
+		void move_camera  (glm::vec2 positionDifference, float delta);
+		void rotate_camera(glm::vec2 positionDifference, float delta);
 	};
 }

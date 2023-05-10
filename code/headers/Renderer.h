@@ -9,6 +9,7 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Window.hpp>
+#include <glm/glm.hpp>
 
 #include "Camera.h"
 #include "VertexArray.h"
@@ -41,6 +42,8 @@ namespace mg
 		float cubeXRotation;
 		float cubeYRotation;
 
+		glm::vec2 mouseLastPosition;
+
 	public:
 
 		Renderer(unsigned int width, unsigned int height);
@@ -48,6 +51,7 @@ namespace mg
 	public:
 
 		void update_camera(float delta);
+		void zoom_camera(sf::Event& event, float delta);
 
 		void update(float delta);
 		void render();

@@ -80,6 +80,8 @@ int main()
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed) running = false;
+
+            renderer.zoom_camera(event, delta_time);
         }
 
         renderer.update(delta_time);

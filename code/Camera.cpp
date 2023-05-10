@@ -11,7 +11,7 @@ namespace mg
 {
 	Camera::Camera(float fov, float near, float far)
 		: fieldOfView(fov), nearPlane(near), farPlane(far),
-		movementSpeed(20)
+		movementSpeed(10), rotationSpeed(10)
 	{
 		
 	}
@@ -31,12 +31,30 @@ namespace mg
 		// I think since its a left handed coord system right becomes left?
 
 		vec3 pos = transform.get_position();
-		transform.set_position(pos + transform.get_right() * -value * movementSpeed * delta);
+		transform.set_position(pos - transform.get_right() * value * movementSpeed * delta);
 	}
 
 	void Camera::move_camera_z_axis(float value, float delta)
 	{
 		vec3 pos = transform.get_position();
 		transform.set_position(pos + transform.get_forward() * value * movementSpeed * delta);
+	}
+
+	void Camera::move_camera(glm::vec2 positionDifference, float delta)
+	{
+		vec3 pos = transform.get_position();
+		transform.set_position(pos + transform.get_right() * movementSpeed * positionDifference.x * delta);
+
+		pos = transform.get_position();
+		transform.set_position(pos + transform.get_up() * movementSpeed * positionDifference.y * delta);
+	}
+
+	void Camera::rotate_camera(glm::vec2 positionDifference, float delta)
+	{
+		vec3 rot = transform.get_rotation();
+		transform.set_rotation(vec3(rot.x + positionDifference.y * rotationSpeed * delta, rot.y, rot.z));
+
+		rot = transform.get_rotation();
+		transform.set_rotation(vec3(rot.x, rot.y + positionDifference.x * rotationSpeed * delta, rot.z));
 	}
 }
