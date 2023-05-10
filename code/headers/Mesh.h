@@ -23,6 +23,8 @@ namespace mg
 		vec3 color;
 	};
 
+	// Struct Texture
+
 	class Mesh
 	{
 
@@ -36,18 +38,15 @@ namespace mg
 		VertexBuffer vbo;
 		IndexBuffer  ibo;
 
-		// TODO: Change for materials
-		shared_ptr< Shader > shader;
-
 		static const Vertex vertexAttributes[];
 		static const GLuint indices[];
 
 	public:
 
-		Mesh(shared_ptr< Shader > meshShader);
+		Mesh();
 
 	public:
 
-		void render();
+		void render(shared_ptr< Shader > shader);
 	};
 }

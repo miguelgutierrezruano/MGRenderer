@@ -35,6 +35,21 @@ namespace mg
 
 	void Model::copyNodesRecursive(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform)
 	{
+		// If node has meshes copy them
+		if (node->mNumMeshes > 0)
+		{
+			copyMeshes(node, scene, parentTransform);
+		}
+
+		// Copy nodes foreach child in node
+		for (unsigned i = 0; i < node->mNumChildren; i++)
+		{
+			copyNodesRecursive(node->mChildren[i], scene, parentTransform * node->mTransformation);
+		}
+	}
+
+	void Model::copyMeshes(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform)
+	{
 
 	}
 }

@@ -39,9 +39,8 @@ namespace mg
         5, 1, 0
     };
 
-	Mesh::Mesh(shared_ptr< Shader > meshShader)
+	Mesh::Mesh()
         : ibo(indices, 3 * 12),
-          shader(meshShader),
           vbo(vertexAttributes, 6 * 8 * sizeof(float))
 	{
         VertexBufferLayout vbLayout;
@@ -51,14 +50,14 @@ namespace mg
         vao.addBuffer(vbo, vbLayout);
 	}
 
-	void Mesh::render()
+	void Mesh::render(shared_ptr< Shader > shader)
 	{
         vao.bind();
         ibo.bind();
-        shader->bind();
+        shader.get()->bind();
 
         mat4 modelMatrix = transform.get_matrix();
-        shader->setUniformMat4f("model", modelMatrix);
+        shader.get()->setUniformMat4f("model", modelMatrix);
 
         glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_INT, nullptr);
 	}

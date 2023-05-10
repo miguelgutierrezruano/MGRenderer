@@ -36,6 +36,8 @@ namespace mg
 		// Convert to material
 		shared_ptr < Shader > shader;
 
+		// vector of models
+
 		shared_ptr < Mesh > cube;
 		shared_ptr < Mesh > childCube;
 		shared_ptr < Mesh > grandchildCube;

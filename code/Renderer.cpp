@@ -29,9 +29,9 @@ namespace mg
 		shader.get()->bind();
 		shader.get()->setUniformMat4f("projection", projection);
 
-		cube = make_shared<Mesh>(shader);
-		childCube = make_shared<Mesh>(shader);
-		grandchildCube = make_shared<Mesh>(shader);
+		cube = make_shared<Mesh>();
+		childCube = make_shared<Mesh>();
+		grandchildCube = make_shared<Mesh>();
 
 		childCube.get()->transform.set_parent(&cube.get()->transform);
 		childCube.get()->transform.set_position({ 2, 0, 0 });
@@ -59,9 +59,9 @@ namespace mg
 
 	void Renderer::render()
 	{
-		cube.get()->render();
-		childCube.get()->render();
-		grandchildCube.get()->render();
+		cube.get()->render(shader);
+		childCube.get()->render(shader);
+		grandchildCube.get()->render(shader);
 	}
 
 	void Renderer::update_camera(float delta)

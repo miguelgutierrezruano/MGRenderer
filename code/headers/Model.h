@@ -5,9 +5,17 @@
 
 #pragma once
 
+#include <vector>
+#include <memory>
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+
+#include "Mesh.h"
+
+using std::shared_ptr;
+using std::vector;
 
 namespace mg
 {
@@ -16,6 +24,7 @@ namespace mg
 
 	private:
 
+		vector< shared_ptr< Mesh > > model_meshes;
 
 	public:
 
@@ -25,5 +34,6 @@ namespace mg
 
 		void loadModel(const char* model_path);
 		void copyNodesRecursive(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform);
+		void copyMeshes(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform);
 	};
 }
