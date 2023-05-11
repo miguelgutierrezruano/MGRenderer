@@ -43,12 +43,27 @@ namespace mg
         : ibo(indices, 3 * 12),
           vbo(vertexAttributes, 6 * 8 * sizeof(float))
 	{
+        owner = nullptr;
+
         VertexBufferLayout vbLayout;
         vbLayout.push<float>(3);
         vbLayout.push<float>(3);
 
         vao.addBuffer(vbo, vbLayout);
 	}
+
+    Mesh::Mesh(Model* meshModel)
+        : ibo(indices, 3 * 12),
+        vbo(vertexAttributes, 6 * 8 * sizeof(float))
+    {
+        owner = meshModel;
+
+        VertexBufferLayout vbLayout;
+        vbLayout.push<float>(3);
+        vbLayout.push<float>(3);
+
+        vao.addBuffer(vbo, vbLayout);
+    }
 
 	void Mesh::render(shared_ptr< Shader > shader)
 	{

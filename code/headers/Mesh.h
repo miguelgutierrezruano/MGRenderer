@@ -17,6 +17,8 @@ using namespace std;
 
 namespace mg
 {
+	class Model;
+
 	struct Vertex
 	{
 		vec3 position;
@@ -34,6 +36,8 @@ namespace mg
 
 	private:
 
+		Model* owner;
+
 		VertexArray  vao;
 		VertexBuffer vbo;
 		IndexBuffer  ibo;
@@ -44,6 +48,7 @@ namespace mg
 	public:
 
 		Mesh();
+		Mesh(Model* meshModel);
 
 	public:
 
