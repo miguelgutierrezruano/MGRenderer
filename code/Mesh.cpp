@@ -5,6 +5,9 @@
 
 #include "VertexBufferLayout.h"
 #include "Mesh.h"
+#include "Model.h"
+
+#include "OpenGLDebugger.h"
 
 using namespace std;
 
@@ -23,7 +26,7 @@ namespace mg
 		{ vec3(-1,+1,+1), vec3(1, 0, 1) } // Back
     };
 
-    const GLuint Mesh::indices[] =
+    const GLuint Mesh::indicesArray[] =
     {
         0, 1, 2,            // front
         0, 2, 3,
@@ -39,24 +42,11 @@ namespace mg
         5, 1, 0
     };
 
-	Mesh::Mesh()
-        : ibo(indices, 3 * 12),
-          vbo(vertexAttributes, 6 * 8 * sizeof(float))
-	{
-        owner = nullptr;
-
-        VertexBufferLayout vbLayout;
-        vbLayout.push<float>(3);
-        vbLayout.push<float>(3);
-
-        vao.addBuffer(vbo, vbLayout);
-	}
-
-    Mesh::Mesh(Model* meshModel)
-        : ibo(indices, 3 * 12),
-        vbo(vertexAttributes, 6 * 8 * sizeof(float))
+    Mesh::Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices)
+		: vbo(meshVertices.data(), (unsigned int)meshVertices.size() * sizeof(Vertex)),
+		ibo(meshIndices.data(), (unsigned int)meshIndices.size())
     {
-        owner = meshModel;
+		owner = meshModel;
 
         VertexBufferLayout vbLayout;
         vbLayout.push<float>(3);
@@ -71,9 +61,11 @@ namespace mg
         ibo.bind();
         shader.get()->bind();
 
-        mat4 modelMatrix = transform.get_matrix();
+        mat4 modelMatrix = owner->transform.get_matrix();
         shader.get()->setUniformMat4f("model", modelMatrix);
 
+		GLClearError();
         glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_INT, nullptr);
+		GLLogCall();
 	}
 }

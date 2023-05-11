@@ -22,6 +22,10 @@ namespace mg
 	class Model
 	{
 
+	public:
+
+		Transform transform;
+
 	private:
 
 		vector< shared_ptr< Mesh > > model_meshes;
@@ -29,6 +33,10 @@ namespace mg
 	public:
 
 		Model(const char* model_path);
+
+	public:
+
+		void render(shared_ptr< Shader > shader);
 
 	private:
 

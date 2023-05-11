@@ -29,19 +29,8 @@ namespace mg
 		shader.get()->bind();
 		shader.get()->setUniformMat4f("projection", projection);
 
-		cube = make_shared<Mesh>();
-		childCube = make_shared<Mesh>();
-		grandchildCube = make_shared<Mesh>();
-
-		childCube.get()->transform.set_parent(&cube.get()->transform);
-		childCube.get()->transform.set_position({ 2, 0, 0 });
-		childCube.get()->transform.set_scale({ .5f, .5f, .5f });
-
-		grandchildCube.get()->transform.set_parent(&childCube.get()->transform);
-		grandchildCube.get()->transform.set_position({ 0, 2, 0 });
-		grandchildCube.get()->transform.set_scale({ .5f, .5f, .5f });
-
-		Model model("../resources/models/japan.fbx");
+		model = make_shared<Model>("");
+		model.get()->transform.set_position(vec3(0, 0, 0));
 	}
 
 	void Renderer::update(float delta)
@@ -54,14 +43,11 @@ namespace mg
 
 		cubeXRotation += 0.05f;
 		cubeYRotation += 0.2f;
-		cube.get()->transform.set_rotation(vec3(cubeXRotation, cubeYRotation, 0));
 	}
 
 	void Renderer::render()
 	{
-		cube.get()->render(shader);
-		childCube.get()->render(shader);
-		grandchildCube.get()->render(shader);
+		model.get()->render(shader);
 	}
 
 	void Renderer::update_camera(float delta)

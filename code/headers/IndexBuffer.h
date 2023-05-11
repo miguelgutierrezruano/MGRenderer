@@ -20,6 +20,8 @@ namespace mg
 
 	public:
 
+		IndexBuffer() { }
+
 		IndexBuffer(const unsigned int* data, unsigned int bufferCount);
 	   ~IndexBuffer();
 

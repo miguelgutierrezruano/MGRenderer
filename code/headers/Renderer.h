@@ -38,9 +38,7 @@ namespace mg
 
 		// vector of shared_ptr models
 
-		shared_ptr < Mesh > cube;
-		shared_ptr < Mesh > childCube;
-		shared_ptr < Mesh > grandchildCube;
+		shared_ptr < Model > model;
 
 		float cubeXRotation;
 		float cubeYRotation;

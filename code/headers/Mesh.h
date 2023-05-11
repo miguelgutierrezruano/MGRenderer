@@ -30,10 +30,6 @@ namespace mg
 	class Mesh
 	{
 
-	public:
-
-		Transform transform;
-
 	private:
 
 		Model* owner;
@@ -43,12 +39,11 @@ namespace mg
 		IndexBuffer  ibo;
 
 		static const Vertex vertexAttributes[];
-		static const GLuint indices[];
+		static const GLuint indicesArray[];
 
 	public:
 
-		Mesh();
-		Mesh(Model* meshModel);
+		Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices);
 
 	public:
 
