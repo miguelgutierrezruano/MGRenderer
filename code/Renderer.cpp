@@ -14,12 +14,11 @@ using namespace sf;
 namespace mg
 {
 	Renderer::Renderer(unsigned int width, unsigned int height)
-		: cubeXRotation(0),
-		cubeYRotation(0),
+		: modelYRotation(0),
 		mouseLastPosition(0, 0),
 		mainCamera(45, 0.1f, 50.f)
 	{
-		mainCamera.transform.set_position({ 0, 0, -8 });
+		mainCamera.transform.set_position({ 0, 3, -20 });
 
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
@@ -29,8 +28,8 @@ namespace mg
 		shader.get()->bind();
 		shader.get()->setUniformMat4f("projection", projection);
 
-		model = make_shared<Model>("");
-		model.get()->transform.set_position(vec3(0, 0, 0));
+		model = make_shared<Model>("../resources/models/japan.fbx");
+		model.get()->transform.set_scale(vec3(0.01f, 0.01f, 0.01f));
 	}
 
 	void Renderer::update(float delta)
@@ -41,8 +40,8 @@ namespace mg
 		shader.get()->bind();
 		shader.get()->setUniformMat4f("view", view);
 
-		cubeXRotation += 0.05f;
-		cubeYRotation += 0.2f;
+		modelYRotation += 0.2f;
+		model.get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()

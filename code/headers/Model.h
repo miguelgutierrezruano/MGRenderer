@@ -41,7 +41,9 @@ namespace mg
 	private:
 
 		void loadModel(const char* model_path);
-		void copyNodesRecursive(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform);
-		void copyMeshes(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform);
+		void processNode(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform);
+		void processMesh(aiMesh* mesh, const aiScene* scene, aiMatrix4x4 nodeTransform);
+
+		mat4 aiToGlm(const aiMatrix4x4& from);
 	};
 }

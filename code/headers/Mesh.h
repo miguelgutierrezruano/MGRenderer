@@ -21,7 +21,7 @@ namespace mg
 
 	struct Vertex
 	{
-		vec3 position;
+		vec4 position;
 		vec3 color;
 	};
 
@@ -37,9 +37,6 @@ namespace mg
 		VertexArray  vao;
 		VertexBuffer vbo;
 		IndexBuffer  ibo;
-
-		static const Vertex vertexAttributes[];
-		static const GLuint indicesArray[];
 
 	public:
 

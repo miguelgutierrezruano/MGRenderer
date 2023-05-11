@@ -40,8 +40,7 @@ namespace mg
 
 		shared_ptr < Model > model;
 
-		float cubeXRotation;
-		float cubeYRotation;
+		float modelYRotation;
 
 		glm::vec2 mouseLastPosition;
 
