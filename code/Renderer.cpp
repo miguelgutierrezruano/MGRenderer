@@ -16,7 +16,7 @@ namespace mg
 	Renderer::Renderer(unsigned int width, unsigned int height)
 		: modelYRotation(0),
 		mouseLastPosition(0, 0),
-		mainCamera(45, 0.1f, 50.f)
+		mainCamera(45, 0.1f, 150.f)
 	{
 		mainCamera.transform.set_position({ 0, 3, -20 });
 
@@ -28,7 +28,7 @@ namespace mg
 		shader.get()->bind();
 		shader.get()->setUniformMat4f("projection", projection);
 
-		model = make_shared<Model>("../resources/models/japan.fbx");
+		model = make_shared<Model>("../resources/models/deer.obj");
 		model.get()->transform.set_scale(vec3(0.01f, 0.01f, 0.01f));
 	}
 
