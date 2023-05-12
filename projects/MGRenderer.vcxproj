@@ -88,6 +88,7 @@
     <ClCompile Include="..\code\Camera.cpp" />
     <ClCompile Include="..\code\headers\other\stb_image.cpp" />
     <ClCompile Include="..\code\IndexBuffer.cpp" />
+    <ClCompile Include="..\code\Light.cpp" />
     <ClCompile Include="..\code\main.cpp" />
     <ClCompile Include="..\code\Mesh.cpp" />
     <ClCompile Include="..\code\Model.cpp" />
@@ -106,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="..\code\headers\Camera.h" />
     <ClInclude Include="..\code\headers\IndexBuffer.h" />
+    <ClInclude Include="..\code\headers\Light.h" />
     <ClInclude Include="..\code\headers\Mesh.h" />
     <ClInclude Include="..\code\headers\Model.h" />
     <ClInclude Include="..\code\headers\OpenGLDebugger.h" />

@@ -11,12 +11,13 @@
 #include <SFML/Window.hpp>
 #include <glm/glm.hpp>
 
+#include "Mesh.h"
 #include "Model.h"
+#include "Light.h"
 #include "Camera.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
-#include "Mesh.h"
 
 using namespace std;
 
@@ -39,6 +40,8 @@ namespace mg
 		// vector of shared_ptr models
 
 		shared_ptr < Model > model;
+
+		Light light;
 
 		float modelYRotation;
 

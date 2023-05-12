@@ -47,6 +47,7 @@ namespace mg
 	void Renderer::render()
 	{
 		model.get()->render(shader);
+		light.render(shader);
 	}
 
 	void Renderer::update_camera(float delta)
