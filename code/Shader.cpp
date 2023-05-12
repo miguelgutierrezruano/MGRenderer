@@ -48,6 +48,11 @@ namespace mg
         glUniform1i(getUniformLocation(name), value);
     }
 
+    void Shader::setUniform3f(const std::string& name, glm::vec3 vec)
+    {
+        glUniform3f(getUniformLocation(name), vec.x, vec.y, vec.z);
+    }
+
     void Shader::setUniformMat4f(const std::string& name, glm::mat4& mat)
     {
         glUniformMatrix4fv(getUniformLocation(name), 1, false, &mat[0][0]);

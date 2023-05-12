@@ -82,10 +82,9 @@ namespace mg
 			vertex.position = transformation * vec4(aiVertex.x, aiVertex.y, aiVertex.z, 1);
 			//vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
 
-			vec3 lightColor = vec3(0.33f, 0.42f, 0.18f);
 			vec3 meshColor = vec3(1.0f, 0.5f, 0.31f);
 
-			vec3 result = lightColor * meshColor;
+			vec3 result = meshColor;
 			vertex.color = result;
 
 			vertices.push_back(vertex);

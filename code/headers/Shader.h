@@ -38,8 +38,9 @@ namespace mg
 		void unbind() const;
 
 		// Set uniforms
-		void setUniform4f(const std::string& name, glm::vec4 vec);
 		void setUniform1i(const std::string& name, int value);
+		void setUniform3f(const std::string& name, glm::vec3 vec);
+		void setUniform4f(const std::string& name, glm::vec4 vec);
 		void setUniformMat4f(const std::string& name, glm::mat4& mat);
 
 	private:

@@ -39,6 +39,8 @@ namespace mg
 
 	public:
 
+		const vec3 get_color() { return color; }
+
 		void render(shared_ptr< Shader > shader);
 
 	};

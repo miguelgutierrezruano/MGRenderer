@@ -23,10 +23,16 @@ namespace mg
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
-		shader = make_shared<Shader>("../code/shaders/Basic.shader");
+		modelShader = make_shared<Shader>("../code/shaders/SimpleLight.shader");
 
-		shader.get()->bind();
-		shader.get()->setUniformMat4f("projection", projection);
+		modelShader.get()->bind();
+		modelShader.get()->setUniformMat4f("projection", projection);
+		modelShader.get()->setUniform3f("lightColor", light.get_color());
+
+		basicShader = make_shared<Shader>("../code/shaders/Basic.shader");
+
+		basicShader.get()->bind();
+		basicShader.get()->setUniformMat4f("projection", projection);
 
 		model = make_shared<Model>("../resources/models/deer.obj");
 		model.get()->transform.set_scale(vec3(0.01f, 0.01f, 0.01f));
@@ -37,8 +43,11 @@ namespace mg
 		update_camera(delta);
 
 		glm::mat4 view = mainCamera.get_view_matrix();
-		shader.get()->bind();
-		shader.get()->setUniformMat4f("view", view);
+		modelShader.get()->bind();
+		modelShader.get()->setUniformMat4f("view", view);
+
+		basicShader.get()->bind();
+		basicShader.get()->setUniformMat4f("view", view);
 
 		modelYRotation += 0.2f;
 		model.get()->transform.set_rotation(vec3(0, modelYRotation, 0));
@@ -46,8 +55,8 @@ namespace mg
 
 	void Renderer::render()
 	{
-		model.get()->render(shader);
-		light.render(shader);
+		model.get()->render(modelShader);
+		light.render(basicShader);
 	}
 
 	void Renderer::update_camera(float delta)

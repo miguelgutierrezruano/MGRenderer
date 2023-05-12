@@ -35,7 +35,8 @@ namespace mg
 		// Light array
 
 		// Convert to material
-		shared_ptr < Shader > shader;
+		shared_ptr < Shader > modelShader;
+		shared_ptr < Shader > basicShader;
 
 		// vector of shared_ptr models
 
