@@ -55,7 +55,7 @@ namespace mg
 	Light::Light()
         : vbo(vertices, sizeof(float) * 6 * 6 * 6)
 	{
-		color = vec3(1, 0, 0);
+		color = vec3(1, 1, 1);
 
         VertexBufferLayout vbLayout;
         vbLayout.push<float>(3);

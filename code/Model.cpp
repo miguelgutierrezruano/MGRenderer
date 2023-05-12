@@ -30,9 +30,7 @@ namespace mg
 		(
 			model_path,
 			aiProcess_Triangulate |
-			aiProcess_JoinIdenticalVertices | 
-			aiProcess_SortByPType |
-			aiProcess_MakeLeftHanded 
+			aiProcess_MakeLeftHanded
 		);
 
 		if (scene && scene->mNumMeshes > 0)
@@ -76,16 +74,16 @@ namespace mg
 		// Process vertices
 		for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 		{
-			auto& aiVertex = mesh->mVertices[i];
-
 			Vertex vertex;
-			vertex.position = transformation * vec4(aiVertex.x, aiVertex.y, aiVertex.z, 1);
-			//vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
 
-			vec3 meshColor = vec3(1.0f, 0.5f, 0.31f);
+			auto& aiVertex = mesh->mVertices[i];
+			vertex.position = vec3(transformation * vec4(aiVertex.x, aiVertex.y, aiVertex.z, 1));
 
-			vec3 result = meshColor;
-			vertex.color = result;
+			auto& aiNormal = mesh->mNormals[i];
+			vertex.normal = vec3(transformation * vec4(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z, 0));
+
+			vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
+			//vertex.color = vec3(1.0f, 0.5f, 0.31f);
 
 			vertices.push_back(vertex);
 		}

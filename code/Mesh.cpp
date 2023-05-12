@@ -20,7 +20,8 @@ namespace mg
 		owner = meshModel;
 
         VertexBufferLayout vbLayout;
-        vbLayout.push<float>(4);
+        vbLayout.push<float>(3);
+        vbLayout.push<float>(3);
         vbLayout.push<float>(3);
 
         vao.addBuffer(vbo, vbLayout);

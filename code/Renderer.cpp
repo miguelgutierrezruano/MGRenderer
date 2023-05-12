@@ -18,12 +18,12 @@ namespace mg
 		mouseLastPosition(0, 0),
 		mainCamera(45, 0.1f, 150.f)
 	{
-		mainCamera.transform.set_position({ 0, 3, -20 });
+		mainCamera.transform.set_position({ 0, 8, -30 });
 
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
-		modelShader = make_shared<Shader>("../code/shaders/SimpleLight.shader");
+		modelShader = make_shared<Shader>("../code/shaders/Phong.shader");
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("projection", projection);
@@ -34,8 +34,15 @@ namespace mg
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("projection", projection);
 
-		model = make_shared<Model>("../resources/models/deer.obj");
+		model = make_shared<Model>("../resources/models/japan.fbx");
 		model.get()->transform.set_scale(vec3(0.01f, 0.01f, 0.01f));
+
+		light.transform.set_position(vec3(0, 3, 0));
+		light.transform.set_rotation(vec3(0, 45, 0));
+		light.transform.set_scale(vec3(0.1, 0.1, 0.1));
+
+		modelShader.get()->bind();
+		modelShader.get()->setUniform3f("lightPos", light.transform.get_position());
 	}
 
 	void Renderer::update(float delta)
@@ -45,6 +52,7 @@ namespace mg
 		glm::mat4 view = mainCamera.get_view_matrix();
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("view", view);
+		modelShader.get()->setUniform3f("viewPos", mainCamera.transform.get_position());
 
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("view", view);
