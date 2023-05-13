@@ -22,7 +22,7 @@ namespace mg
         VertexBufferLayout vbLayout;
         vbLayout.push<float>(3);
         vbLayout.push<float>(3);
-        vbLayout.push<float>(3);
+        vbLayout.push<float>(2);
 
         vao.addBuffer(vbo, vbLayout);
     }

@@ -23,8 +23,7 @@ namespace mg
 	{
 		vec3 position;
 		vec3 normal;
-		vec3 color;
-		//vec2 texCoords;
+		vec2 texCoords;
 	};
 
 	// Struct Texture

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "Renderer.h"
+#include <string>
 
 namespace mg
 {
@@ -29,7 +29,7 @@ namespace mg
 
 		void bind(unsigned slot = 0);
 		void unbind();
-
+		
 		int getWidth () const { return  width; }
 		int getHeight() const { return height; }
 	};

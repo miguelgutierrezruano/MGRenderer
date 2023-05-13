@@ -80,6 +80,9 @@
     <None Include="..\code\shaders\PhongColor.shader">
       <Filter>resources\shaders</Filter>
     </None>
+    <None Include="..\code\shaders\PhongTexture.shader">
+      <Filter>resources\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\code\headers\Renderer.h">

@@ -8,10 +8,10 @@
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
-layout(location = 2) in vec3 color;
+layout(location = 2) in vec2 texCoord;
 
 out vec3 vertexNormal;
-out vec3 vertexColor;
+out vec2 vertexTexCoord;
 out vec3 fragPos;
 
 // Object transform
@@ -26,7 +26,7 @@ uniform mat4 projection;
 void main()
 {
     vertexNormal = mat3(transpose(inverse(model))) * normal;
-    vertexColor = color;
+    vertexTexCoord = texCoord;
 
     fragPos = vec3(model * vec4(position, 1));
     gl_Position = projection * view * model * vec4(position, 1);
@@ -36,7 +36,7 @@ void main()
 #version 330 core
 
 in vec3 vertexNormal;
-in vec3 vertexColor;
+in vec2 vertexTexCoord;
 in vec3 fragPos;
 
 out vec4 color;
@@ -44,6 +44,7 @@ out vec4 color;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform vec3 viewPos;
+uniform sampler2D mainTexture;
 
 void main()
 {
@@ -66,8 +67,11 @@ void main()
     float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
 
+    vec4 texColor = texture(mainTexture, vertexTexCoord);
+
     // Result
-    vec3 result = (ambient + diffuse + specular) * vertexColor;
+    vec3 result = (ambient + diffuse + specular) * vec3(texColor);
     color = vec4(result, 1);
+    //color = texColor;
 }
         

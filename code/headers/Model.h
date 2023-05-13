@@ -30,6 +30,8 @@ namespace mg
 
 		vector< shared_ptr< Mesh > > model_meshes;
 
+		// Texture vector 
+
 	public:
 
 		Model(const char* model_path);

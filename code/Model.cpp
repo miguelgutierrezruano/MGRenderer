@@ -3,7 +3,10 @@
 // @miguelgutierrezruano
 // 2023
 
+#include "OpenGLDebugger.h"
 #include "Model.h"
+
+#include <random>
 
 namespace mg
 {
@@ -16,7 +19,9 @@ namespace mg
 	{
 		for (auto& mesh : model_meshes)
 		{
+			GLClearError();
 			mesh.get()->render(shader);
+			GLLogCall();
 		}
 	}
 
@@ -82,9 +87,13 @@ namespace mg
 			auto& aiNormal = mesh->mNormals[i];
 			vertex.normal = vec3(transformation * vec4(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z, 0));
 
-			//vertex.texCoords = vec2(1.0f, 0.0f);
+			std::random_device rd; // create a random device to seed the random number generator
+			std::mt19937 gen(rd()); // create a Mersenne Twister engine with the random device as the seed
+			std::uniform_real_distribution<float> dis(0.0f, 1.0f); // create a uniform real distribution between 0 and 1
 
-			vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
+			vertex.texCoords = vec2(dis(gen), dis(gen));
+
+			//vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
 			//vertex.color = vec3(1.0f, 0.5f, 0.31f);
 
 			vertices.push_back(vertex);

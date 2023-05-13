@@ -104,6 +104,7 @@
     <None Include="..\code\shaders\Basic.shader" />
     <None Include="..\code\shaders\BasicTexture.shader" />
     <None Include="..\code\shaders\PhongColor.shader" />
+    <None Include="..\code\shaders\PhongTexture.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\code\headers\Camera.h" />

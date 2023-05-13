@@ -16,14 +16,15 @@ namespace mg
 	Renderer::Renderer(unsigned int width, unsigned int height)
 		: modelYRotation(0),
 		mouseLastPosition(0, 0),
-		mainCamera(45, 0.1f, 150.f)
+		mainCamera(45, 0.1f, 150.f),
+		texture("../resources/textures/ciri.jpg")
 	{
 		mainCamera.transform.set_position({ 0, 8, -30 });
 
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
-		modelShader = make_shared<Shader>("../code/shaders/PhongColor.shader");
+		modelShader = make_shared<Shader>("../code/shaders/PhongTexture.shader");
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("projection", projection);
@@ -43,6 +44,9 @@ namespace mg
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniform3f("lightPos", light.transform.get_position());
+
+		texture.bind(0);
+		modelShader.get()->setUniform1i("mainTexture", 0);
 	}
 
 	void Renderer::update(float delta)
@@ -58,7 +62,7 @@ namespace mg
 		basicShader.get()->setUniformMat4f("view", view);
 
 		modelYRotation += 0.2f;
-		model.get()->transform.set_rotation(vec3(0, modelYRotation, 0));
+		//model.get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()

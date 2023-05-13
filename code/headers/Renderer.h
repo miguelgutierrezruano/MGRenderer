@@ -5,11 +5,12 @@
 
 #pragma once
 
-#include <glad/glad.h>
 #include <iostream>
 #include <memory>
+#include <vector>
 #include <SFML/Window.hpp>
 #include <glm/glm.hpp>
+#include <glad/glad.h>
 
 #include "Mesh.h"
 #include "Model.h"
@@ -18,6 +19,7 @@
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -31,18 +33,17 @@ namespace mg
 		// Camera
 		Camera mainCamera;
 
-		// Entity array
-		// Light array
-
 		// Convert to material
 		shared_ptr < Shader > modelShader;
 		shared_ptr < Shader > basicShader;
 
 		// vector of shared_ptr models
-
 		shared_ptr < Model > model;
 
+		// Light vector
 		Light light;
+
+		Texture texture;
 
 		float modelYRotation;
 
