@@ -77,7 +77,7 @@
     <None Include="..\code\shaders\BasicTexture.shader">
       <Filter>resources\shaders</Filter>
     </None>
-    <None Include="..\code\shaders\Phong.shader">
+    <None Include="..\code\shaders\PhongColor.shader">
       <Filter>resources\shaders</Filter>
     </None>
   </ItemGroup>

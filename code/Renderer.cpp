@@ -23,7 +23,7 @@ namespace mg
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
-		modelShader = make_shared<Shader>("../code/shaders/Phong.shader");
+		modelShader = make_shared<Shader>("../code/shaders/PhongColor.shader");
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("projection", projection);

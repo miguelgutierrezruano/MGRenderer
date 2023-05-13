@@ -82,6 +82,8 @@ namespace mg
 			auto& aiNormal = mesh->mNormals[i];
 			vertex.normal = vec3(transformation * vec4(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z, 0));
 
+			//vertex.texCoords = vec2(1.0f, 0.0f);
+
 			vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
 			//vertex.color = vec3(1.0f, 0.5f, 0.31f);
 
