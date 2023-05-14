@@ -25,6 +25,9 @@
     <Filter Include="sources\other\stb_image">
       <UniqueIdentifier>{9f3e8428-d46f-41bc-802f-5aa9863674b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="headers\Lights">
+      <UniqueIdentifier>{96228b49-d17b-4d14-8c25-1008a91bd109}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\code\main.cpp">
@@ -125,7 +128,10 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\code\headers\Light.h">
-      <Filter>headers</Filter>
+      <Filter>headers\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\DirectionalLight.h">
+      <Filter>headers\Lights</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,9 @@ using std::shared_ptr;
 
 namespace mg
 {
+	// Enum with light types
+
+	// Light class is used as a cube right now
 	class Light
 	{
 
@@ -23,12 +26,14 @@ namespace mg
 
 		Transform transform;
 
-		// Cube to represent light position
-		static float vertices[];
+	protected:
+
+		vec3 color;
 
 	private:
 
-		vec3 color;
+		// Cube to represent light position
+		static float vertices[];
 
 		VertexArray  vao;
 		VertexBuffer vbo;

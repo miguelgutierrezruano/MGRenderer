@@ -53,10 +53,19 @@ namespace mg
 		cube.transform.set_position(vec3(-1, 0, -4));
 
 		modelShader.get()->bind();
-		modelShader.get()->setUniform3f("light.position", light.transform.get_position());
-		modelShader.get()->setUniform3f("light.ambient", vec3(0.2f, 0.2f, 0.2f));
-		modelShader.get()->setUniform3f("light.diffuse", vec3(0.5f, 0.5f, 0.5f));
-		modelShader.get()->setUniform3f("light.specular", vec3(1.0f, 1.0f, 1.0f));
+		modelShader.get()->setUniform3f("dirLight.direction", vec3(1, -1, 0));
+		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.1f, 0.1f, 0.1f));
+		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.4f, 0.4f, 0.4f));
+		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.4f, 0.4f, 0.4f));
+
+		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_position());
+		modelShader.get()->setUniform3f("pointLight.ambient", vec3(0.1f, 0.1f, 0.1f));
+		modelShader.get()->setUniform3f("pointLight.diffuse", vec3(1.0f, 1.0f, 1.0f));
+		modelShader.get()->setUniform3f("pointLight.specular", vec3(1.0f, 1.0f, 1.0f));
+
+		modelShader.get()->setUniform1f("pointLight.constant", 1.0f);
+		modelShader.get()->setUniform1f("pointLight.linear", 0.22f);
+		modelShader.get()->setUniform1f("pointLight.quadratic", 0.2f);
 	}
 
 	void Renderer::update(float delta)
@@ -77,9 +86,9 @@ namespace mg
 
 	void Renderer::render()
 	{
-		//model.get()->render(modelShader);
+		model.get()->render(modelShader);
 		light.render(basicShader);
-		cube.render(modelShader);
+		//cube.render(modelShader);
 	}
 
 	void Renderer::update_camera(float delta)

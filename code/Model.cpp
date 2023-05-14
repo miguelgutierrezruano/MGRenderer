@@ -100,7 +100,7 @@ namespace mg
 				vertex.texCoords = textureCoordinates;
 			}
 			else*/
-				vertex.texCoords = vec2(0, 0);
+				vertex.texCoords = vec2(0.5, 0.5);
 
 			vertices.push_back(vertex);
 		}
