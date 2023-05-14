@@ -17,7 +17,8 @@ namespace mg
 		: modelYRotation(0),
 		mouseLastPosition(0, 0),
 		mainCamera(45, 0.1f, 150.f),
-		texture("../resources/textures/ciri.jpg")
+		texture("../resources/textures/container2.png"),
+		specularTexture("../resources/textures/container2_specular.png")
 	{
 		mainCamera.transform.set_position({ 0, 8, -30 });
 
@@ -28,11 +29,13 @@ namespace mg
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("projection", projection);
-		modelShader.get()->setUniform3f("lightColor", light.get_color());
 
-		modelShader.get()->setUniform3f("material.ambient", vec3(1.0f, 0.5f, 0.31f));
-		modelShader.get()->setUniform3f("material.diffuse", vec3(1.0f, 0.5f, 0.31f));
-		modelShader.get()->setUniform3f("material.specular", vec3(0.5f, 0.5f, 0.5f));
+		texture.bind(0);
+		specularTexture.bind(1);
+		//modelShader.get()->setUniform1i("texture1", 0);
+
+		modelShader.get()->setUniform1i("material.diffuse", 0);
+		modelShader.get()->setUniform1i("material.specular", 1);
 		modelShader.get()->setUniform1f("material.shininess", 32.f);
 
 		basicShader = make_shared<Shader>("../code/shaders/Basic.shader");
@@ -47,11 +50,13 @@ namespace mg
 		light.transform.set_rotation(vec3(0, 45, 0));
 		light.transform.set_scale(vec3(0.1, 0.1, 0.1));
 
-		modelShader.get()->bind();
-		modelShader.get()->setUniform3f("lightPos", light.transform.get_position());
+		cube.transform.set_position(vec3(-1, 0, -4));
 
-		texture.bind(0);
-		modelShader.get()->setUniform1i("texture1", 0);
+		modelShader.get()->bind();
+		modelShader.get()->setUniform3f("light.position", light.transform.get_position());
+		modelShader.get()->setUniform3f("light.ambient", vec3(0.2f, 0.2f, 0.2f));
+		modelShader.get()->setUniform3f("light.diffuse", vec3(0.5f, 0.5f, 0.5f));
+		modelShader.get()->setUniform3f("light.specular", vec3(1.0f, 1.0f, 1.0f));
 	}
 
 	void Renderer::update(float delta)
@@ -72,8 +77,9 @@ namespace mg
 
 	void Renderer::render()
 	{
-		model.get()->render(modelShader);
+		//model.get()->render(modelShader);
 		light.render(basicShader);
+		cube.render(modelShader);
 	}
 
 	void Renderer::update_camera(float delta)

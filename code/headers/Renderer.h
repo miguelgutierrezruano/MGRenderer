@@ -43,7 +43,11 @@ namespace mg
 		// Light vector
 		Light light;
 
+		// Acting as a cube to understand concepts
+		Light cube;
+
 		Texture texture;
+		Texture specularTexture;
 
 		float modelYRotation;
 
