@@ -25,6 +25,16 @@ namespace mg
 
 	}
 
+	const vec3 Transform::get_world_position()
+	{
+		mat4 parentMatrix(1);
+
+		if (parent != nullptr)
+			parentMatrix = parent->get_matrix();
+
+		return parentMatrix * vec4(position, 0);
+	}
+
 	const vec3 Transform::get_forward()
 	{
 		mat4 rotationMatrix = mat4(1);

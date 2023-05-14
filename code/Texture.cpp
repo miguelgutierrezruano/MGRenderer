@@ -4,6 +4,7 @@
 // 2023
 
 #include <glad/glad.h>
+#include <iostream>
 
 #include "other/stb_image.h"
 #include "Texture.h"
@@ -31,7 +32,12 @@ namespace mg
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		if (localBuffer)
+		{
 			stbi_image_free(localBuffer);
+			std::cout << "Texture loaded: " << path << std::endl;
+		}
+		else
+			std::cout << "Failed to load texture: " << path << std::endl;
 	}
 
 	Texture::~Texture()

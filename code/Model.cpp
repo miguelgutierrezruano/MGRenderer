@@ -6,7 +6,7 @@
 #include "OpenGLDebugger.h"
 #include "Model.h"
 
-#include <random>
+#include <iostream>
 
 namespace mg
 {
@@ -67,7 +67,7 @@ namespace mg
 	{
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
-		vector<Texture> textures;
+		vector<shared_ptr<Texture>> textures;
 
 		// Get color of mesh
 		aiColor4D diffuse_color;
@@ -92,15 +92,15 @@ namespace mg
 			vertex.normal = vec3(transformation * vec4(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z, 0));
 
 			// Texture coordinates
-			/*if (mesh->mTextureCoords[0])
+			if (mesh->mTextureCoords[0])
 			{
 				vec2 textureCoordinates;
 				textureCoordinates.x = mesh->mTextureCoords[0][i].x;
 				textureCoordinates.y = mesh->mTextureCoords[0][i].y;
 				vertex.texCoords = textureCoordinates;
 			}
-			else*/
-				vertex.texCoords = vec2(0.5, 0.5);
+			else
+				vertex.texCoords = vec2(0.0f, 0.0f);
 
 			vertices.push_back(vertex);
 		}
@@ -116,8 +116,56 @@ namespace mg
 				indices.push_back(face.mIndices[j]);
 		}
 
+		// Process materials
+		if (mesh->mMaterialIndex >= 0)
+		{
+			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+
+			// Load diffuse maps
+			auto diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+
+			// Load specular maps
+			auto specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		}
+
 		shared_ptr< Mesh > mgMesh = make_shared<Mesh>(this, vertices, indices, textures);
 		model_meshes.push_back(mgMesh);
+	}
+
+	vector<shared_ptr<Texture>> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
+	{
+		vector<shared_ptr< Texture >> textures;
+
+		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+		{
+			aiString str;
+			mat->GetTexture(type, i, &str);
+
+			bool skip = false;
+
+			// Check if texture has been loaded before
+			for (unsigned int j = 0; j < loaded_textures.size(); j++)
+			{
+				if (std::strcmp(loaded_textures[j].get()->getPath().data(), str.C_Str()) == 0)
+				{
+					textures.push_back(loaded_textures[j]);
+					skip = true;
+					break;
+				}
+			}
+
+			if (!skip)
+			{
+				auto texture = make_shared<Texture>(str.C_Str());
+				texture.get()->type = typeName;
+				textures.push_back(texture);
+				loaded_textures.push_back(texture);
+			}
+		}
+
+		return textures;
 	}
 
 	mat4 Model::aiToGlm(const aiMatrix4x4& from)

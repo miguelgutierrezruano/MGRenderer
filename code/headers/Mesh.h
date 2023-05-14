@@ -28,8 +28,6 @@ namespace mg
 		vec2 texCoords;
 	};
 
-	// Struct Texture
-
 	class Mesh
 	{
 
@@ -37,7 +35,7 @@ namespace mg
 
 		Model* owner;
 
-		vector< Texture > textures;
+		vector< shared_ptr<Texture> > textures;
 
 		VertexArray  vao;
 		VertexBuffer vbo;
@@ -45,7 +43,7 @@ namespace mg
 
 	public:
 
-		Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices, vector<Texture> textures);
+		Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices, vector<shared_ptr<Texture>> textures);
 
 	public:
 

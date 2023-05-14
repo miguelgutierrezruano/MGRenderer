@@ -37,9 +37,10 @@ void main()
 
 struct Material
 {
+    // Think a better way
     sampler2D diffuse;
     sampler2D specular;
-    float     shininess;
+    float shininess;
 };
 
 struct DirectionalLight
@@ -74,6 +75,7 @@ in vec3 fragPos;
 out vec4 color;
 
 uniform Material material;
+
 uniform DirectionalLight dirLight;
 uniform PointLight pointLight;
 

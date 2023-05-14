@@ -8,6 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <map>
 #include <SFML/Window.hpp>
 #include <glm/glm.hpp>
 #include <glad/glad.h>
@@ -38,16 +39,10 @@ namespace mg
 		shared_ptr < Shader > basicShader;
 
 		// vector of shared_ptr models
-		shared_ptr < Model > model;
-
+		map< std::string, shared_ptr < Model > > models;
+		
 		// Light vector
 		Light light;
-
-		// Acting as a cube to understand concepts
-		Light cube;
-
-		Texture texture;
-		Texture specularTexture;
 
 		float modelYRotation;
 

@@ -16,9 +16,7 @@ namespace mg
 	Renderer::Renderer(unsigned int width, unsigned int height)
 		: modelYRotation(0),
 		mouseLastPosition(0, 0),
-		mainCamera(45, 0.1f, 150.f),
-		texture("../resources/textures/container2.png"),
-		specularTexture("../resources/textures/container2_specular.png")
+		mainCamera(45, 0.1f, 150.f)
 	{
 		mainCamera.transform.set_position({ 0, 8, -30 });
 
@@ -30,12 +28,6 @@ namespace mg
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("projection", projection);
 
-		texture.bind(0);
-		specularTexture.bind(1);
-		//modelShader.get()->setUniform1i("texture1", 0);
-
-		modelShader.get()->setUniform1i("material.diffuse", 0);
-		modelShader.get()->setUniform1i("material.specular", 1);
 		modelShader.get()->setUniform1f("material.shininess", 32.f);
 
 		basicShader = make_shared<Shader>("../code/shaders/Basic.shader");
@@ -43,20 +35,34 @@ namespace mg
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("projection", projection);
 
-		model = make_shared<Model>("../resources/models/japan.fbx");
-		model.get()->transform.set_scale(vec3(0.01f, 0.01f, 0.01f));
+		//model = make_shared<Model>("../resources/models/backpack/backpack.obj");
+		/*auto bow     = make_shared<Model>("../resources/models/Modelo/Modelos/Bow.fbx");
+		auto body    = make_shared<Model>("../resources/models/Modelo/Modelos/Body.fbx");
+		auto clothes = make_shared<Model>("../resources/models/Modelo/Modelos/Clothes.fbx");
+		auto hair    = make_shared<Model>("../resources/models/Modelo/Modelos/Hair.fbx");
 
-		light.transform.set_position(vec3(0, 3, 0));
+		models.insert(std::pair<std::string, shared_ptr<Model>>("bow", bow));
+		models.insert(std::pair<std::string, shared_ptr<Model>>("body", body));
+		models.insert(std::pair<std::string, shared_ptr<Model>>("clothes", clothes));
+		models.insert(std::pair<std::string, shared_ptr<Model>>("hair", hair));*/
+
+		auto model = make_shared<Model>("../resources/models/backpack/backpack.obj");
+		models.insert(std::pair<std::string, shared_ptr<Model>>("backpack", model));
+
+		for (auto& [name, model] : models)
+		{
+			model.get()->transform.set_scale(vec3(5.f));
+		}
+
+		light.transform.set_position(vec3(3, 3, 0));
 		light.transform.set_rotation(vec3(0, 45, 0));
-		light.transform.set_scale(vec3(0.1, 0.1, 0.1));
-
-		cube.transform.set_position(vec3(-1, 0, -4));
+		light.transform.set_scale(vec3(0.1f));
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniform3f("dirLight.direction", vec3(1, -1, 0));
-		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.1f, 0.1f, 0.1f));
-		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.4f, 0.4f, 0.4f));
-		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.4f, 0.4f, 0.4f));
+		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.2f, 0.2f, 0.2f));
+		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.8f, 0.8f, 0.8f));
+		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.8f, 0.8f, 0.8f));
 
 		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_position());
 		modelShader.get()->setUniform3f("pointLight.ambient", vec3(0.1f, 0.1f, 0.1f));
@@ -81,14 +87,17 @@ namespace mg
 		basicShader.get()->setUniformMat4f("view", view);
 
 		modelYRotation += 0.2f;
-		//model.get()->transform.set_rotation(vec3(0, modelYRotation, 0));
+		//models["bow"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()
 	{
-		model.get()->render(modelShader);
+		for (auto& [name, model] : models)
+		{
+			model.get()->render(modelShader);
+		}
+
 		light.render(basicShader);
-		//cube.render(modelShader);
 	}
 
 	void Renderer::update_camera(float delta)

@@ -34,6 +34,8 @@ namespace mg
 		const vec3 get_rotation() { return rotation; }
 		const vec3 get_scale() { return scale; }
 
+		const vec3 get_world_position();
+
 		void set_position(vec3 newPosition) { position = newPosition; }
 		void set_rotation(vec3 newRotation) { rotation = newRotation; }
 		void set_scale(vec3 newScale) { scale = newScale; }

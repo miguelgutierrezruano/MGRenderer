@@ -29,7 +29,8 @@ namespace mg
 
 	private:
 
-		vector< shared_ptr< Mesh > > model_meshes;
+		vector< shared_ptr< Texture > > loaded_textures;
+		vector< shared_ptr<    Mesh > > model_meshes;
 
 	public:
 
@@ -44,6 +45,8 @@ namespace mg
 		void loadModel(const char* model_path);
 		void processNode(aiNode* node, const aiScene* scene, aiMatrix4x4 parentTransform);
 		void processMesh(aiMesh* mesh, const aiScene* scene, aiMatrix4x4 nodeTransform);
+
+		vector< shared_ptr< Texture > > loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
 
 		mat4 aiToGlm(const aiMatrix4x4& from);
 	};

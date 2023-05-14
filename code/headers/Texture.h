@@ -12,9 +12,13 @@ namespace mg
 	class Texture
 	{
 
-	private:
+	public:
 
 		unsigned int id;
+		std::string type;
+
+	private:
+
 		std::string filePath;
 		unsigned char* localBuffer;
 
@@ -32,5 +36,7 @@ namespace mg
 		
 		int getWidth () const { return  width; }
 		int getHeight() const { return height; }
+
+		const std::string& getPath() { return filePath; }
 	};
 }
