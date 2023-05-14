@@ -35,7 +35,8 @@ namespace mg
 		(
 			model_path,
 			aiProcess_Triangulate |
-			aiProcess_MakeLeftHanded
+			aiProcess_MakeLeftHanded |
+			aiProcess_FlipUVs
 		);
 
 		if (scene && scene->mNumMeshes > 0)
@@ -66,6 +67,7 @@ namespace mg
 	{
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
+		vector<Texture> textures;
 
 		// Get color of mesh
 		aiColor4D diffuse_color;
@@ -81,20 +83,24 @@ namespace mg
 		{
 			Vertex vertex;
 
+			// Position
 			auto& aiVertex = mesh->mVertices[i];
 			vertex.position = vec3(transformation * vec4(aiVertex.x, aiVertex.y, aiVertex.z, 1));
 
+			// Normal
 			auto& aiNormal = mesh->mNormals[i];
 			vertex.normal = vec3(transformation * vec4(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z, 0));
 
-			std::random_device rd; // create a random device to seed the random number generator
-			std::mt19937 gen(rd()); // create a Mersenne Twister engine with the random device as the seed
-			std::uniform_real_distribution<float> dis(0.0f, 1.0f); // create a uniform real distribution between 0 and 1
-
-			vertex.texCoords = vec2(dis(gen), dis(gen));
-
-			//vertex.color = vec3(diffuse_color.r, diffuse_color.g, diffuse_color.b);
-			//vertex.color = vec3(1.0f, 0.5f, 0.31f);
+			// Texture coordinates
+			/*if (mesh->mTextureCoords[0])
+			{
+				vec2 textureCoordinates;
+				textureCoordinates.x = mesh->mTextureCoords[0][i].x;
+				textureCoordinates.y = mesh->mTextureCoords[0][i].y;
+				vertex.texCoords = textureCoordinates;
+			}
+			else*/
+				vertex.texCoords = vec2(0, 0);
 
 			vertices.push_back(vertex);
 		}
@@ -110,7 +116,7 @@ namespace mg
 				indices.push_back(face.mIndices[j]);
 		}
 
-		shared_ptr< Mesh > mgMesh = make_shared<Mesh>(this, vertices, indices);
+		shared_ptr< Mesh > mgMesh = make_shared<Mesh>(this, vertices, indices, textures);
 		model_meshes.push_back(mgMesh);
 	}
 

@@ -6,12 +6,14 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "Shader.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Transform.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -35,13 +37,15 @@ namespace mg
 
 		Model* owner;
 
+		vector< Texture > textures;
+
 		VertexArray  vao;
 		VertexBuffer vbo;
 		IndexBuffer  ibo;
 
 	public:
 
-		Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices);
+		Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices, vector<Texture> textures);
 
 	public:
 

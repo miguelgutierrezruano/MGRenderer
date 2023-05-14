@@ -46,7 +46,7 @@ namespace mg
 		modelShader.get()->setUniform3f("lightPos", light.transform.get_position());
 
 		texture.bind(0);
-		modelShader.get()->setUniform1i("mainTexture", 0);
+		modelShader.get()->setUniform1i("texture1", 0);
 	}
 
 	void Renderer::update(float delta)

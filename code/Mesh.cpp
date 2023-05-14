@@ -13,11 +13,13 @@ using namespace std;
 
 namespace mg
 {
-    Mesh::Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices)
+    Mesh::Mesh(Model* meshModel, vector<Vertex> meshVertices, vector<unsigned int> meshIndices, vector<Texture> textures)
 		: vbo(meshVertices.data(), (unsigned int)meshVertices.size() * sizeof(Vertex)),
 		ibo(meshIndices.data(), (unsigned int)meshIndices.size())
     {
 		owner = meshModel;
+
+        this->textures = textures;
 
         VertexBufferLayout vbLayout;
         vbLayout.push<float>(3);

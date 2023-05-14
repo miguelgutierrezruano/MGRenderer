@@ -13,6 +13,7 @@
 #include <assimp/postprocess.h>
 
 #include "Mesh.h"
+#include "Texture.h"
 
 using std::shared_ptr;
 using std::vector;
@@ -29,8 +30,6 @@ namespace mg
 	private:
 
 		vector< shared_ptr< Mesh > > model_meshes;
-
-		// Texture vector 
 
 	public:
 
