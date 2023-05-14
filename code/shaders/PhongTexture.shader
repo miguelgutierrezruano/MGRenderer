@@ -35,12 +35,21 @@ void main()
 #shader fragment
 #version 330 core
 
+struct Material
+{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+
 in vec3 vertexNormal;
 in vec2 vertexTexCoord;
 in vec3 fragPos;
 
 out vec4 color;
 
+uniform Material material;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform vec3 viewPos;
@@ -50,29 +59,28 @@ uniform sampler2D texture1;
 void main()
 {
     // Ambient lightning
-    float ambientStrength = 0.1;
-    vec3 ambient = ambientStrength * lightColor;
+    vec3 ambient = material.ambient * lightColor;
 
     // Diffuse lightning
     vec3 norm = normalize(vertexNormal);
     vec3 lightDirection = normalize(lightPos - fragPos);
 
     float diff = max(dot(norm, lightDirection), 0.0);
-    vec3 diffuse = diff * lightColor;
+    vec3 diffuse = (diff * material.diffuse) * lightColor;
 
     // Specular lightning
-    float specularStrength = 0.5;
     vec3 viewDirection = normalize(viewPos - fragPos);
     vec3 reflectDirection = reflect(-lightDirection, norm);
 
-    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), 32);
-    vec3 specular = specularStrength * spec * lightColor;
+    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), material.shininess);
+    vec3 specular = (spec * material.specular) * lightColor;
 
+
+    // Texture color
     vec4 texColor = texture(texture1, vertexTexCoord);
 
     // Result
-    vec3 result = (ambient + diffuse + specular) * vec3(texColor);
+    vec3 result = (ambient + diffuse + specular); // * vec3(texColor);
     color = vec4(result, 1);
-    //color = texColor;
 }
         

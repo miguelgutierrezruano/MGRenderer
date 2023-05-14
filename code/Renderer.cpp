@@ -30,6 +30,11 @@ namespace mg
 		modelShader.get()->setUniformMat4f("projection", projection);
 		modelShader.get()->setUniform3f("lightColor", light.get_color());
 
+		modelShader.get()->setUniform3f("material.ambient", vec3(1.0f, 0.5f, 0.31f));
+		modelShader.get()->setUniform3f("material.diffuse", vec3(1.0f, 0.5f, 0.31f));
+		modelShader.get()->setUniform3f("material.specular", vec3(0.5f, 0.5f, 0.5f));
+		modelShader.get()->setUniform1f("material.shininess", 32.f);
+
 		basicShader = make_shared<Shader>("../code/shaders/Basic.shader");
 
 		basicShader.get()->bind();
