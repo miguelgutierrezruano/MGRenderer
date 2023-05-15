@@ -45,7 +45,7 @@ int main()
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     // Enable backface culling
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -60,6 +60,7 @@ int main()
     Renderer renderer(windowWidth, windowHeight);
 
     glClearColor(214.f / 255.f, 79.f / 255.f, 79.f / 255.f, 1);
+    //glClearColor(255.f / 255.f, 161.f / 255.f, 197.f / 255.f, 1);
 
     // Delta time variables
     auto  chrono = high_resolution_clock();

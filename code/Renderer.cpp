@@ -36,17 +36,9 @@ namespace mg
 		basicShader.get()->setUniformMat4f("projection", projection);
 
 		//model = make_shared<Model>("../resources/models/backpack/backpack.obj");
-		/*auto bow     = make_shared<Model>("../resources/models/Modelo/Modelos/Bow.fbx");
-		auto body    = make_shared<Model>("../resources/models/Modelo/Modelos/Body.fbx");
-		auto clothes = make_shared<Model>("../resources/models/Modelo/Modelos/Clothes.fbx");
-		auto hair    = make_shared<Model>("../resources/models/Modelo/Modelos/Hair.fbx");
 
-		models.insert(std::pair<std::string, shared_ptr<Model>>("bow", bow));
-		models.insert(std::pair<std::string, shared_ptr<Model>>("body", body));
-		models.insert(std::pair<std::string, shared_ptr<Model>>("clothes", clothes));
-		models.insert(std::pair<std::string, shared_ptr<Model>>("hair", hair));*/
-
-		auto model = make_shared<Model>("../resources/models/kindred/source/journey.fbx");
+		//auto model = make_shared<Model>("../resources/models/kindred/source/kindred.fbx");
+		auto model = make_shared<Model>("../resources/models/journey/journey.fbx");
 		models.insert(std::pair<std::string, shared_ptr<Model>>("kindred", model));
 
 		for (auto& [name, model] : models)
@@ -54,7 +46,7 @@ namespace mg
 			model.get()->transform.set_scale(vec3(0.1f));
 		}
 
-		light.transform.set_position(vec3(3, 3, 0));
+		light.transform.set_position(vec3(3, 5, 0));
 		light.transform.set_rotation(vec3(0, 45, 0));
 		light.transform.set_scale(vec3(0.1f));
 
@@ -87,7 +79,7 @@ namespace mg
 		basicShader.get()->setUniformMat4f("view", view);
 
 		modelYRotation += 0.6f;
-		models["kindred"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
+		//models["kindred"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()
@@ -97,7 +89,7 @@ namespace mg
 			model.get()->render(modelShader);
 		}
 
-		//light.render(basicShader);
+		light.render(basicShader);
 	}
 
 	void Renderer::update_camera(float delta)
