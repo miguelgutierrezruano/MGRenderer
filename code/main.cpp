@@ -59,7 +59,7 @@ int main()
 
     Renderer renderer(windowWidth, windowHeight);
 
-    glClearColor(214.f / 255.f, 79.f / 255.f, 79.f / 255.f, 1);
+    glClearColor(230.f / 255.f, 145.f / 255.f, 92.f / 255.f, 1);
     //glClearColor(255.f / 255.f, 161.f / 255.f, 197.f / 255.f, 1);
 
     // Delta time variables

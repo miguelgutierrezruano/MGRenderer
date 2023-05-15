@@ -38,13 +38,16 @@ namespace mg
 		//model = make_shared<Model>("../resources/models/backpack/backpack.obj");
 
 		//auto model = make_shared<Model>("../resources/models/kindred/source/kindred.fbx");
-		auto model = make_shared<Model>("../resources/models/journey/journey.fbx");
-		models.insert(std::pair<std::string, shared_ptr<Model>>("kindred", model));
+		auto journey = make_shared<Model>("../resources/models/journey/journey.fbx");
+		auto desert = make_shared<Model>("../resources/models/desert/desert.fbx");
+		models.insert(std::pair<std::string, shared_ptr<Model>>("journey", journey));
+		models.insert(std::pair<std::string, shared_ptr<Model>>("desert", desert));
 
-		for (auto& [name, model] : models)
-		{
-			model.get()->transform.set_scale(vec3(0.1f));
-		}
+		models["journey"].get()->transform.set_parent(&desert.get()->transform);
+		desert.get()->transform.set_position(vec3(0, -2, 0));
+		desert.get()->transform.set_scale(vec3(0.2f));
+
+		journey.get()->transform.set_position(vec3(0, 21, 0));
 
 		light.transform.set_position(vec3(3, 5, 0));
 		light.transform.set_rotation(vec3(0, 45, 0));
@@ -79,7 +82,7 @@ namespace mg
 		basicShader.get()->setUniformMat4f("view", view);
 
 		modelYRotation += 0.6f;
-		//models["kindred"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
+		models["desert"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()
@@ -89,7 +92,7 @@ namespace mg
 			model.get()->render(modelShader);
 		}
 
-		light.render(basicShader);
+		//light.render(basicShader);
 	}
 
 	void Renderer::update_camera(float delta)
