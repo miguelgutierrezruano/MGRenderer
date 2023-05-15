@@ -59,7 +59,7 @@ int main()
 
     Renderer renderer(windowWidth, windowHeight);
 
-    glClearColor(0.1f, 0.1f, 0.1f, 1);
+    glClearColor(214.f / 255.f, 79.f / 255.f, 79.f / 255.f, 1);
 
     // Delta time variables
     auto  chrono = high_resolution_clock();

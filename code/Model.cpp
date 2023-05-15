@@ -35,8 +35,8 @@ namespace mg
 		(
 			model_path,
 			aiProcess_Triangulate |
-			aiProcess_MakeLeftHanded |
-			aiProcess_FlipUVs
+			aiProcess_MakeLeftHanded
+			//aiProcess_FlipWindingOrder
 		);
 
 		if (scene && scene->mNumMeshes > 0)

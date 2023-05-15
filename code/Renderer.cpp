@@ -46,12 +46,12 @@ namespace mg
 		models.insert(std::pair<std::string, shared_ptr<Model>>("clothes", clothes));
 		models.insert(std::pair<std::string, shared_ptr<Model>>("hair", hair));*/
 
-		auto model = make_shared<Model>("../resources/models/backpack/backpack.obj");
-		models.insert(std::pair<std::string, shared_ptr<Model>>("backpack", model));
+		auto model = make_shared<Model>("../resources/models/kindred/source/journey.fbx");
+		models.insert(std::pair<std::string, shared_ptr<Model>>("kindred", model));
 
 		for (auto& [name, model] : models)
 		{
-			model.get()->transform.set_scale(vec3(5.f));
+			model.get()->transform.set_scale(vec3(0.1f));
 		}
 
 		light.transform.set_position(vec3(3, 3, 0));
@@ -86,8 +86,8 @@ namespace mg
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("view", view);
 
-		modelYRotation += 0.2f;
-		//models["bow"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
+		modelYRotation += 0.6f;
+		models["kindred"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()
@@ -97,7 +97,7 @@ namespace mg
 			model.get()->render(modelShader);
 		}
 
-		light.render(basicShader);
+		//light.render(basicShader);
 	}
 
 	void Renderer::update_camera(float delta)
