@@ -47,26 +47,28 @@ namespace mg
 		desert.get()->transform.set_position(vec3(0, -2, 0));
 		desert.get()->transform.set_scale(vec3(0.2f));
 
-		journey.get()->transform.set_position(vec3(0, 21, 0));
+		journey.get()->transform.set_position(vec3(0, 23, 0));
 
-		light.transform.set_position(vec3(3, 5, 0));
-		light.transform.set_rotation(vec3(0, 45, 0));
-		light.transform.set_scale(vec3(0.1f));
+		light.transform.set_parent(&desert.get()->transform);
+
+		light.transform.set_position(vec3(0, 80, -30));
+		//light.transform.set_rotation(vec3(0, 45, 0));
+		//light.transform.set_scale(vec3(0.1f));
 
 		modelShader.get()->bind();
 		modelShader.get()->setUniform3f("dirLight.direction", vec3(1, -1, 0));
-		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.2f, 0.2f, 0.2f));
-		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.8f, 0.8f, 0.8f));
-		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.8f, 0.8f, 0.8f));
+		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.05f, 0.05f, 0.05f));
+		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.3f, 0.3f, 0.3f));
+		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.1f, 0.1f, 0.1f));
 
-		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_position());
-		modelShader.get()->setUniform3f("pointLight.ambient", vec3(0.1f, 0.1f, 0.1f));
+		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_world_position());
+		modelShader.get()->setUniform3f("pointLight.ambient", vec3(0.05f, 0.05f, 0.05f));
 		modelShader.get()->setUniform3f("pointLight.diffuse", vec3(1.0f, 1.0f, 1.0f));
 		modelShader.get()->setUniform3f("pointLight.specular", vec3(1.0f, 1.0f, 1.0f));
 
 		modelShader.get()->setUniform1f("pointLight.constant", 1.0f);
-		modelShader.get()->setUniform1f("pointLight.linear", 0.22f);
-		modelShader.get()->setUniform1f("pointLight.quadratic", 0.2f);
+		modelShader.get()->setUniform1f("pointLight.linear", 0.045f);
+		modelShader.get()->setUniform1f("pointLight.quadratic", 0.0075f);
 	}
 
 	void Renderer::update(float delta)
@@ -77,6 +79,7 @@ namespace mg
 		modelShader.get()->bind();
 		modelShader.get()->setUniformMat4f("view", view);
 		modelShader.get()->setUniform3f("viewPos", mainCamera.transform.get_position());
+		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_world_position());
 
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("view", view);
