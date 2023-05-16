@@ -23,6 +23,7 @@ namespace mg
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
 
+		// Model shader
 		modelShader = make_shared<Shader>("../code/shaders/PhongTexture.shader");
 
 		modelShader.get()->bind();
@@ -30,14 +31,18 @@ namespace mg
 
 		modelShader.get()->setUniform1f("material.shininess", 32.f);
 
+		// Basic shader (remove)
 		basicShader = make_shared<Shader>("../code/shaders/Basic.shader");
 
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("projection", projection);
 
-		//model = make_shared<Model>("../resources/models/backpack/backpack.obj");
+		// Skybox shader
+		skyboxShader = make_shared<Shader>("../code/shaders/Skybox.shader");
 
-		//auto model = make_shared<Model>("../resources/models/kindred/source/kindred.fbx");
+		skyboxShader.get()->bind();
+		skyboxShader.get()->setUniformMat4f("projection", projection);
+
 		auto journey = make_shared<Model>("../resources/models/journey/journey.fbx");
 		auto desert = make_shared<Model>("../resources/models/desert/desert.fbx");
 		models.insert(std::pair<std::string, shared_ptr<Model>>("journey", journey));
@@ -52,13 +57,11 @@ namespace mg
 		light.transform.set_parent(&desert.get()->transform);
 
 		light.transform.set_position(vec3(0, 80, -30));
-		//light.transform.set_rotation(vec3(0, 45, 0));
-		//light.transform.set_scale(vec3(0.1f));
 
 		modelShader.get()->bind();
-		modelShader.get()->setUniform3f("dirLight.direction", vec3(1, -1, 0));
+		modelShader.get()->setUniform3f("dirLight.direction", vec3(0, -1, 0));
 		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.05f, 0.05f, 0.05f));
-		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.3f, 0.3f, 0.3f));
+		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.1f, 0.1f, 0.1f));
 		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.1f, 0.1f, 0.1f));
 
 		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_world_position());
@@ -66,9 +69,11 @@ namespace mg
 		modelShader.get()->setUniform3f("pointLight.diffuse", vec3(1.0f, 1.0f, 1.0f));
 		modelShader.get()->setUniform3f("pointLight.specular", vec3(1.0f, 1.0f, 1.0f));
 
+		modelShader.get()->setUniform1f("material.shininess", 0.2f);
+
 		modelShader.get()->setUniform1f("pointLight.constant", 1.0f);
-		modelShader.get()->setUniform1f("pointLight.linear", 0.045f);
-		modelShader.get()->setUniform1f("pointLight.quadratic", 0.0075f);
+		modelShader.get()->setUniform1f("pointLight.linear", 0.07f);
+		modelShader.get()->setUniform1f("pointLight.quadratic", 0.017f);
 	}
 
 	void Renderer::update(float delta)
@@ -84,12 +89,19 @@ namespace mg
 		basicShader.get()->bind();
 		basicShader.get()->setUniformMat4f("view", view);
 
+		// View for skybox without translation
+		view = glm::mat4(glm::mat3(view));
+		skyboxShader.get()->bind();
+		skyboxShader.get()->setUniformMat4f("view", view);
+
 		modelYRotation += 0.6f;
 		models["desert"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 
 	void Renderer::render()
 	{
+		skybox.render(skyboxShader);
+
 		for (auto& [name, model] : models)
 		{
 			model.get()->render(modelShader);

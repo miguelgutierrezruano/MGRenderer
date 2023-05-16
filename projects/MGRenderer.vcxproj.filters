@@ -72,18 +72,21 @@
     <ClCompile Include="..\code\Light.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\code\Skybox.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\code\shaders\Basic.shader">
-      <Filter>resources\shaders</Filter>
-    </None>
-    <None Include="..\code\shaders\BasicTexture.shader">
       <Filter>resources\shaders</Filter>
     </None>
     <None Include="..\code\shaders\PhongColor.shader">
       <Filter>resources\shaders</Filter>
     </None>
     <None Include="..\code\shaders\PhongTexture.shader">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\code\shaders\Skybox.shader">
       <Filter>resources\shaders</Filter>
     </None>
   </ItemGroup>
@@ -132,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="..\code\headers\DirectionalLight.h">
       <Filter>headers\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="..\code\headers\Skybox.h">
+      <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

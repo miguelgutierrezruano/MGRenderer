@@ -21,6 +21,7 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Skybox.h"
 
 using namespace std;
 
@@ -37,10 +38,13 @@ namespace mg
 		// Convert to material
 		shared_ptr < Shader > modelShader;
 		shared_ptr < Shader > basicShader;
+		shared_ptr < Shader > skyboxShader;
 
 		// vector of shared_ptr models
 		map< std::string, shared_ptr < Model > > models;
 		
+		Skybox skybox;
+
 		// Light vector
 		Light light;
 

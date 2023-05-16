@@ -81,8 +81,6 @@ uniform PointLight pointLight;
 
 uniform vec3 viewPos;
 
-uniform sampler2D texture1;
-
 void main()
 {
     // properties

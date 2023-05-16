@@ -96,6 +96,7 @@
     <ClCompile Include="..\code\OpenGLDebugger.cpp" />
     <ClCompile Include="..\code\Renderer.cpp" />
     <ClCompile Include="..\code\Shader.cpp" />
+    <ClCompile Include="..\code\Skybox.cpp" />
     <ClCompile Include="..\code\Texture.cpp" />
     <ClCompile Include="..\code\Transform.cpp" />
     <ClCompile Include="..\code\VertexArray.cpp" />
@@ -103,9 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\code\shaders\Basic.shader" />
-    <None Include="..\code\shaders\BasicTexture.shader" />
     <None Include="..\code\shaders\PhongColor.shader" />
     <None Include="..\code\shaders\PhongTexture.shader" />
+    <None Include="..\code\shaders\Skybox.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\code\headers\Camera.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="..\code\headers\other\stb_image.h" />
     <ClInclude Include="..\code\headers\Renderer.h" />
     <ClInclude Include="..\code\headers\Shader.h" />
+    <ClInclude Include="..\code\headers\Skybox.h" />
     <ClInclude Include="..\code\headers\Texture.h" />
     <ClInclude Include="..\code\headers\Transform.h" />
     <ClInclude Include="..\code\headers\VertexArray.h" />
