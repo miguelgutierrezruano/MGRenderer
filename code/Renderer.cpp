@@ -3,6 +3,7 @@
 // @miguelgutierrezruano
 // 2023
 
+#include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -19,6 +20,7 @@ namespace mg
 		mainCamera(45, 0.1f, 150.f)
 	{
 		mainCamera.transform.set_position({ 0, 8, -30 });
+		//mainCamera.transform.set_rotation({ 0, 180, 0 });
 
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);
@@ -81,13 +83,13 @@ namespace mg
 		update_camera(delta);
 
 		glm::mat4 view = mainCamera.get_view_matrix();
-		modelShader.get()->bind();
-		modelShader.get()->setUniformMat4f("view", view);
-		modelShader.get()->setUniform3f("viewPos", mainCamera.transform.get_position());
-		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_world_position());
+		modelShader->bind();
+		modelShader->setUniformMat4f("view", view);
+		modelShader->setUniform3f("viewPos", mainCamera.transform.get_position());
+		modelShader->setUniform3f("pointLight.position", light.transform.get_world_position());
 
-		basicShader.get()->bind();
-		basicShader.get()->setUniformMat4f("view", view);
+		basicShader->bind();
+		basicShader->setUniformMat4f("view", view);
 
 		// View for skybox without translation
 		view = glm::mat4(glm::mat3(view));

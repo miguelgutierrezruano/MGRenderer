@@ -37,7 +37,6 @@ void main()
 
 struct Material
 {
-    // Think a better way
     sampler2D diffuse;
     sampler2D specular;
     float shininess;
