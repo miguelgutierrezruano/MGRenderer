@@ -17,7 +17,9 @@ namespace mg
 	Renderer::Renderer(unsigned int width, unsigned int height)
 		: modelYRotation(0),
 		mouseLastPosition(0, 0),
-		mainCamera(45, 0.1f, 150.f)
+		mainCamera(45, 0.1f, 150.f),
+		light(vec3(0.05f), vec3(1.f), vec3(0.5f)),
+		directionalLight(vec3(1, 0, 0), vec3(0.05f), vec3(221.f / 255, 84.f / 255, 28.f / 255), vec3(0.0f))
 	{
 		mainCamera.transform.set_position({ 0, 8, -30 });
 		//mainCamera.transform.set_rotation({ 0, 180, 0 });
@@ -57,19 +59,18 @@ namespace mg
 		journey.get()->transform.set_position(vec3(0, 23, 0));
 
 		light.transform.set_parent(&desert.get()->transform);
-
 		light.transform.set_position(vec3(0, 80, -30));
 
 		modelShader.get()->bind();
-		modelShader.get()->setUniform3f("dirLight.direction", vec3(0, -1, 0));
-		modelShader.get()->setUniform3f("dirLight.ambient", vec3(0.05f, 0.05f, 0.05f));
-		modelShader.get()->setUniform3f("dirLight.diffuse", vec3(0.1f, 0.1f, 0.1f));
-		modelShader.get()->setUniform3f("dirLight.specular", vec3(0.1f, 0.1f, 0.1f));
+		modelShader.get()->setUniform3f("dirLight.direction", directionalLight.getDirection());
+		modelShader.get()->setUniform3f("dirLight.ambient", directionalLight.getAmbient());
+		modelShader.get()->setUniform3f("dirLight.diffuse", directionalLight.getDiffuse());
+		modelShader.get()->setUniform3f("dirLight.specular", directionalLight.getSpecular());
 
 		modelShader.get()->setUniform3f("pointLight.position", light.transform.get_world_position());
-		modelShader.get()->setUniform3f("pointLight.ambient", vec3(0.05f, 0.05f, 0.05f));
-		modelShader.get()->setUniform3f("pointLight.diffuse", vec3(1.0f, 1.0f, 1.0f));
-		modelShader.get()->setUniform3f("pointLight.specular", vec3(1.0f, 1.0f, 1.0f));
+		modelShader.get()->setUniform3f("pointLight.ambient", light.getAmbient());
+		modelShader.get()->setUniform3f("pointLight.diffuse", light.getDiffuse());
+		modelShader.get()->setUniform3f("pointLight.specular", light.getSpecular());
 
 		modelShader.get()->setUniform1f("material.shininess", 0.2f);
 
@@ -96,7 +97,7 @@ namespace mg
 		skyboxShader.get()->bind();
 		skyboxShader.get()->setUniformMat4f("view", view);
 
-		modelYRotation += 0.6f;
+		modelYRotation += 10.f * delta;
 		models["desert"].get()->transform.set_rotation(vec3(0, modelYRotation, 0));
 	}
 

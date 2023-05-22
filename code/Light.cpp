@@ -53,10 +53,12 @@ namespace mg
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
     };
 
-	Light::Light()
+	Light::Light(vec3 ambient, vec3 diffuse, vec3 specular)
         : vbo(vertices, sizeof(float) * 8 * 6 * 6)
 	{
-		color = vec3(1, 1, 1);
+        this->ambient = ambient;
+        this->diffuse = diffuse;
+        this->specular = specular;
 
         VertexBufferLayout vbLayout;
         vbLayout.push<float>(3);
@@ -65,6 +67,13 @@ namespace mg
 
         vao.addBuffer(vbo, vbLayout);
 	}
+
+    Light::Light()
+    {
+        ambient = vec3(0.1f);
+        diffuse = vec3(1);
+        specular = vec3(1);
+    }
 
 	void Light::render(shared_ptr< Shader > shader)
 	{

@@ -18,17 +18,18 @@ namespace mg
 
 	public:
 
-		DirectionalLight()
-		{
-			direction = vec3(0, 1, 0);
-		}
-
-		DirectionalLight(vec3 lightDirection)
+		DirectionalLight(vec3 lightDirection, vec3 ambient, vec3 diffuse, vec3 specular)
 		{
 			setDirection(lightDirection);
+
+			this->ambient = ambient;
+			this->diffuse = diffuse;
+			this->specular = specular;
 		}
 
 	public:
+
+		const vec3 getDirection() const { return direction; }
 
 		void setDirection(vec3 lightDirection)
 		{

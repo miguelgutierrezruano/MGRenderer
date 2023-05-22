@@ -17,8 +17,6 @@ using std::shared_ptr;
 namespace mg
 {
 	// Enum with light types
-
-	// Light class is used as a cube right now
 	class Light
 	{
 
@@ -28,7 +26,10 @@ namespace mg
 
 	protected:
 
-		vec3 color;
+		// Color for each lightning 
+		vec3 ambient;
+		vec3 diffuse;
+		vec3 specular;
 
 	private:
 
@@ -40,13 +41,18 @@ namespace mg
 
 	public:
 
+		Light(vec3 ambient, vec3 diffuse, vec3 specular);
+
+	protected:
+
 		Light();
 
 	public:
 
-		const vec3 get_color() { return color; }
-
 		void render(shared_ptr< Shader > shader);
 
+		const vec3 getAmbient () const { return  ambient; }
+		const vec3 getDiffuse () const { return  diffuse; }
+		const vec3 getSpecular() const { return specular; }
 	};
 }
