@@ -5,11 +5,11 @@
 
 #pragma once
 
-#include "Light.h"
+#include "PointLight.h"
 
 namespace mg
 {
-	class DirectionalLight : public Light
+	class DirectionalLight : public PointLight
 	{
 
 	private:

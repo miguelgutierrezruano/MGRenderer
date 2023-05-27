@@ -22,7 +22,6 @@ namespace mg
 		directionalLight(vec3(1, 0, 0), vec3(0.05f), vec3(221.f / 255, 84.f / 255, 28.f / 255), vec3(0.0f))
 	{
 		mainCamera.transform.set_position({ 0, 8, -30 });
-		//mainCamera.transform.set_rotation({ 0, 180, 0 });
 
 		// Get from camera get projection
 		glm::mat4 projection = mainCamera.get_projection_matrix((float)width / (float)height);

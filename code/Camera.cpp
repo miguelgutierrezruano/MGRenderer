@@ -28,8 +28,6 @@ namespace mg
 
 	void Camera::move_camera_x_axis(float value, float delta)
 	{
-		// I think since its a left handed coord system right becomes left?
-
 		vec3 pos = transform.get_position();
 		transform.set_position(pos - transform.get_right() * value * movementSpeed * delta);
 	}

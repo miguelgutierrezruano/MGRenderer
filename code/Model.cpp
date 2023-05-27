@@ -157,7 +157,8 @@ namespace mg
 
 			if (!skip)
 			{
-				auto texture = make_shared<Texture>(str.C_Str());
+				std::string path = std::string("..\\resources\\") + str.C_Str();
+				auto texture = make_shared<Texture>(path);
 				texture.get()->type = typeName;
 				textures.push_back(texture);
 				loaded_textures.push_back(texture);

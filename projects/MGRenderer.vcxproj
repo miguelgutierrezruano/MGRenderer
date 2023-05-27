@@ -89,11 +89,11 @@
     <ClCompile Include="..\code\Camera.cpp" />
     <ClCompile Include="..\code\headers\other\stb_image.cpp" />
     <ClCompile Include="..\code\IndexBuffer.cpp" />
-    <ClCompile Include="..\code\Light.cpp" />
     <ClCompile Include="..\code\main.cpp" />
     <ClCompile Include="..\code\Mesh.cpp" />
     <ClCompile Include="..\code\Model.cpp" />
     <ClCompile Include="..\code\OpenGLDebugger.cpp" />
+    <ClCompile Include="..\code\PointLight.cpp" />
     <ClCompile Include="..\code\Renderer.cpp" />
     <ClCompile Include="..\code\Shader.cpp" />
     <ClCompile Include="..\code\Skybox.cpp" />
@@ -112,11 +112,11 @@
     <ClInclude Include="..\code\headers\Camera.h" />
     <ClInclude Include="..\code\headers\DirectionalLight.h" />
     <ClInclude Include="..\code\headers\IndexBuffer.h" />
-    <ClInclude Include="..\code\headers\Light.h" />
     <ClInclude Include="..\code\headers\Mesh.h" />
     <ClInclude Include="..\code\headers\Model.h" />
     <ClInclude Include="..\code\headers\OpenGLDebugger.h" />
     <ClInclude Include="..\code\headers\other\stb_image.h" />
+    <ClInclude Include="..\code\headers\PointLight.h" />
     <ClInclude Include="..\code\headers\Renderer.h" />
     <ClInclude Include="..\code\headers\Shader.h" />
     <ClInclude Include="..\code\headers\Skybox.h" />
@@ -125,9 +125,6 @@
     <ClInclude Include="..\code\headers\VertexArray.h" />
     <ClInclude Include="..\code\headers\VertexBuffer.h" />
     <ClInclude Include="..\code\headers\VertexBufferLayout.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\resources\textures\ciri.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

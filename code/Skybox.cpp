@@ -61,13 +61,6 @@ namespace mg
 	{
 		facePaths =
 		{
-			/*"../resources/textures/skybox/right.jpg", 
-			"../resources/textures/skybox/left.jpg",
-			"../resources/textures/skybox/top.jpg",
-			"../resources/textures/skybox/bottom.jpg",
-			"../resources/textures/skybox/front.jpg",
-			"../resources/textures/skybox/back.jpg"*/
-
 			"../resources/textures/sunset/left.png",
 			"../resources/textures/sunset/right.png",
 			"../resources/textures/sunset/top.png",

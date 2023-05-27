@@ -15,7 +15,7 @@
 
 #include "Mesh.h"
 #include "Model.h"
-#include "Light.h"
+#include "PointLight.h"
 #include "DirectionalLight.h"
 #include "Camera.h"
 #include "VertexArray.h"
@@ -47,7 +47,7 @@ namespace mg
 		Skybox skybox;
 
 		// Lights
-		Light light;
+		PointLight light;
 		DirectionalLight directionalLight;
 
 		float modelYRotation;

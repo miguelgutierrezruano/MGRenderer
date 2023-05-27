@@ -69,10 +69,10 @@
     <ClCompile Include="..\code\Model.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\code\Light.cpp">
+    <ClCompile Include="..\code\Skybox.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\code\Skybox.cpp">
+    <ClCompile Include="..\code\PointLight.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -130,19 +130,14 @@
     <ClInclude Include="..\code\headers\Model.h">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\code\headers\Light.h">
-      <Filter>headers\Lights</Filter>
-    </ClInclude>
     <ClInclude Include="..\code\headers\DirectionalLight.h">
       <Filter>headers\Lights</Filter>
     </ClInclude>
     <ClInclude Include="..\code\headers\Skybox.h">
       <Filter>headers</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\resources\textures\ciri.jpg">
-      <Filter>resources\textures</Filter>
-    </Image>
+    <ClInclude Include="..\code\headers\PointLight.h">
+      <Filter>headers\Lights</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

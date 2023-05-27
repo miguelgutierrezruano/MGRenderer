@@ -7,7 +7,6 @@
 
 namespace mg
 {
-	// TODO: Make template with different int types
 	class IndexBuffer
 	{
 
